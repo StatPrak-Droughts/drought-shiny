@@ -36,4 +36,5 @@ vignettes/*.pdf
 *.knit.md
 
 # R Environment Variables
-.Renviron
+# Data 
+data/
