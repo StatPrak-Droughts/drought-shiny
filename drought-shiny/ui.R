@@ -1,47 +1,91 @@
 library(shiny)
 library(shinydashboard)
 library(tmap)
-header <- dashboardHeader(
-    title = "Low Level Water Events in Bavaria"
-)
+library(shiny)
+library(shinythemes)
+library(shinycssloaders)
+library(tmap)
+library(tmaptools)
+library(plotly)
 
-body <- dashboardBody(
-    tags$head(
-        tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
-    ),
-    h1("Landing Page & Info about the Project, How to use this app"),
-    tabItems(
-        tabItem("map_overview",
-                fluidRow(
-                         box(title = "Catchments of Interest", solidHeader = TRUE, collapsible = TRUE,
-                             tmapOutput("three_catchment_map"))
-                         )
-                ),
-        tabItem("descriptive",
-                fluidRow(box(title = "Descriptive Analysis"))
-            ),
-        tabItem("models",
-                fluidRow(box(title = "Models"))
-            ),
-        tabItem("about",
-                fluidRow(box(title = "About & Info"))
-            )
-        )
-)
+button_color_css <- "
+#DivCompClear, #FinderClear, #EnterTimes{
+/* Change the background color of the update button
+to blue. */
+background: DodgerBlue;
+/* Change the text size to 15 pixels. */
+font-size: 15px;
+}"
 
-
-sidebar <-  dashboardSidebar(
-    sidebarMenu(
-        menuItem("Map Overview", tabName = "map_overview", icon = icon("map")),
-        menuItem("Descriptive Analysis", tabName = "descriptive", icon = icon("th")),
-        menuItem("Models", tabName = "models", icon = icon("chart-simple")),
-        menuItem("About & Credits", tabName = "about", icon = icon("info"))
+shinyUI(fluidPage(
+    navbarPage(id = "navbar", title = div(img(src='icon.png', style="background-color: transparent; margin-top: -10px;", height = 35), tags$a(href= "www.google.com", "Niedrigwasser BY")),
+               theme = shinytheme("lumen"),
+               navbarMenu("Catchments", icon = icon("globe"),
+                          tabPanel("Overview", fluid = TRUE, icon = icon("map"),
+                                   tags$style(button_color_css),
+                                   tags$style(HTML(".datepicker {z-index:99999 !important;}")),
+                                       mainPanel(
+                                           titlePanel("Map Overview"),
+                                           tmapOutput("three_catchment_map")
+                                       )
+                                   ),
+                          tabPanel("Fränkische Saale Salz", icon = icon("water"),
+                                       mainPanel(
+                                           h1("Hello")
+                                       )
+                           ),
+                          tabPanel("Iller Kempten", icon = icon("water"),
+                                       mainPanel(
+                                           h1("hello")
+                                       )),
+                          tabPanel("Isar Mittenwald", icon = icon("water"),
+                                       mainPanel(
+                                           h1("Hello")
+                                       ))
+                          ),
+               navbarMenu("Descriptive Analysis", icon = icon("earth-europe"),
+                          tabPanel("Overall", fluid = TRUE, icon = icon("map"),
+                                   tags$style(button_color_css),
+                                   sidebarLayout(
+                                       sidebarPanel(
+                                           h1("Inputs")
+                                       ),
+                                       mainPanel(
+                                           tabsetPanel(type = "tabs",
+                                                       tabPanel("Summer", h1("Summer Plot")),
+                                                       tabPanel("Winter", h1("Winter Plot"))
+                                           )
+                                       )
+                                   )),
+                          tabPanel("Extreme Value Analysis", icon = icon("chart-simple"),
+                                   sidebarLayout(
+                                       sidebarPanel(
+                                           h1("Inputs"),
+                                           selectInput("extreme_value_season", label = "Select Catchment", 
+                                                       choices = c("Fränkische Saale / Salz", "Iller Kempten", "Isar Mittenwald"))
+                                       ),
+                                       mainPanel(
+                                           tabsetPanel(type = "tabs",
+                                                       tabPanel("Summer", h1("Summer"), dataTableOutput("qpr_hydro_summer")),
+                                                       tabPanel("Winter", h1("Winter"), dataTableOutput("qpr_hydro_winter"))
+                                           )
+                                       )
+                                   )
+                               )
+                          ),
+               navbarMenu("Model", icon = icon("flag"),
+                          tabPanel("Analysis", icon = icon("chart-simple"),
+                                       mainPanel(
+                                           h1("Hello")
+                                       )
+                                   )
+                          ),
+               navbarMenu("More", icon = icon("info"),
+                          tabPanel("About", icon = icon("circle-question"),
+                                   fluidRow(
+                                       h1("About")
+                                   )
+                          ))
     )
 )
-
-dashboardPage(
-    skin = "black",
-    header,
-    sidebar,
-    body
 )
