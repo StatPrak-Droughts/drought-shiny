@@ -69,17 +69,17 @@ shinyServer(function(input, output) {
     )
     
     pick_qpr_summer_table <-  reactive({
-      if (input$extreme_value_season %in% "Fränkische Saale / Salz") {
+      if (input$extreme_value_catchment %in% "Fränkische Saale / Salz") {
         return(datatable(qpr_hydro_summer_10304, rownames = TRUE, options = list(scrollX = TRUE,
                                                                           scrollY = TRUE,
                                                                           autoWidth = TRUE)))
       }
-      if (input$extreme_value_season %in% "Iller Kempten") {
+      if (input$extreme_value_catchment %in% "Iller Kempten") {
         return(datatable(qpr_hydro_summer_11502, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
                                                                                  autoWidth = TRUE)))
       }
-      if (input$extreme_value_season %in% "Isar Mittenwald") {
+      if (input$extreme_value_catchment %in% "Isar Mittenwald") {
         return(datatable(qpr_hydro_summer_20203, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
                                                                                  autoWidth = TRUE)))
@@ -88,17 +88,17 @@ shinyServer(function(input, output) {
     )
     
     pick_qpr_winter_table <-  reactive({
-      if (input$extreme_value_season %in% "Fränkische Saale / Salz") {
+      if (input$extreme_value_catchment %in% "Fränkische Saale / Salz") {
         return(datatable(qpr_hydro_winter_10304, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
                                                                                  autoWidth = TRUE)))
       }
-      if (input$extreme_value_season %in% "Iller Kempten") {
+      if (input$extreme_value_catchment %in% "Iller Kempten") {
         return(datatable(qpr_hydro_winter_11502, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
                                                                                  autoWidth = TRUE)))
       }
-      if (input$extreme_value_season %in% "Isar Mittenwald") {
+      if (input$extreme_value_catchment %in% "Isar Mittenwald") {
         return(datatable(qpr_hydro_winter_20203, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
                                                                                  autoWidth = TRUE)))

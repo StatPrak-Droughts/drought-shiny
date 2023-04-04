@@ -18,7 +18,7 @@ font-size: 15px;
 }"
 
 shinyUI(fluidPage(
-    navbarPage(id = "navbar", title = div(img(src='icon.png', style="background-color: transparent; margin-top: -10px;", height = 35), tags$a(href= "www.google.com", "Niedrigwasser BY")),
+    navbarPage(id = "navbar", title = div(img(src='icon.png', style="background-color: transparent; margin-top: -10px;", height = 35), tags$a(href= "https://github.com/StatPrak-Droughts", "Niedrigwasser BY")),
                theme = shinytheme("lumen"),
                navbarMenu("Catchments", icon = icon("globe"),
                           tabPanel("Overview", fluid = TRUE, icon = icon("map"),
@@ -61,7 +61,7 @@ shinyUI(fluidPage(
                                    sidebarLayout(
                                        sidebarPanel(
                                            h1("Inputs"),
-                                           selectInput("extreme_value_season", label = "Select Catchment", 
+                                           selectInput("extreme_value_catchment", label = "Select Catchment", 
                                                        choices = c("Fränkische Saale / Salz", "Iller Kempten", "Isar Mittenwald"))
                                        ),
                                        mainPanel(
@@ -73,11 +73,27 @@ shinyUI(fluidPage(
                                    )
                                )
                           ),
-               navbarMenu("Model", icon = icon("flag"),
+               navbarMenu("Model", icon = icon("chart-simple"),
                           tabPanel("Analysis", icon = icon("chart-simple"),
+                                   sidebarLayout(
+                                       sidebarPanel(
+                                           h1("Inputs"),
+                                           selectInput("model_catchment", label = "Select Catchment", 
+                                                       choices = c("Fränkische Saale / Salz", "Iller Kempten", "Isar Mittenwald")),
+                                           selectInput("model_selection", label = "Select Model", choices = c("Full Model", "Trimmed Model", "Interactions")),
+                                           checkboxInput("model_effects", label = "Show effect Plots?")
+                                       ),
                                        mainPanel(
-                                           h1("Hello")
+                                           tabsetPanel(type = "tabs",
+                                                       tabPanel("Summer", h1("Summer")
+                            
+                                                                ),
+                                                       tabPanel("Winter", h1("Winter")
+                                                                
+                                                                )
+                                           )
                                        )
+                                   )
                                    )
                           ),
                navbarMenu("More", icon = icon("info"),
