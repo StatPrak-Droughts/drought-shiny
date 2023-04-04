@@ -80,15 +80,18 @@ shinyUI(fluidPage(
                                            h1("Inputs"),
                                            selectInput("model_catchment", label = "Select Catchment", 
                                                        choices = c("Fränkische Saale / Salz", "Iller Kempten", "Isar Mittenwald")),
-                                           selectInput("model_selection", label = "Select Model", choices = c("Full Model", "Trimmed Model", "Interactions")),
-                                           checkboxInput("model_effects", label = "Show effect Plots?")
+                                           selectInput("model_selection", label = "Select model", choices = c("Full Model", "Trimmed Model", "Interactions")),
+                                           checkboxInput("model_summary", label = "Show model summary?", FALSE),
+                                           checkboxInput("model_effects", label = "Show effect plots?", FALSE)
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
-                                                       tabPanel("Summer", h1("Summer")
-                            
+                                                       tabPanel("Summer",
+                                                                h1("Summer"),
+                                                                verbatimTextOutput("model_summary_summer")
                                                                 ),
-                                                       tabPanel("Winter", h1("Winter")
+                                                       tabPanel("Winter", 
+                                                                h1("Winter")
                                                                 
                                                                 )
                                            )

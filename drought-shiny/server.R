@@ -4,6 +4,9 @@ tmap_options(check.and.fix = TRUE)
 library(tidyverse)
 library(sf)
 library(DT)
+library(mgcv)
+library(sjPlot)
+library(slickR)
 # Data Read in ----
 # # # Read data
 # hydro_summer_20203 <- readRDS(file = "./data/hydro_summer_20203.RDS")
@@ -56,6 +59,14 @@ library(DT)
 # qpr_hydro_winter_10304 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_10304.RDS")
 # qpr_hydro_winter_11502 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_11502.RDS")
 # qpr_hydro_winter_20203 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_20203.RDS")
+# load(file= "./added_data/models/gam_all_summer_11502.Rdata")
+# load(file= "./added_data/models/gam_all_winter_11502.Rdata")
+# load(file= "./added_data/models/gam_trimmed_summer_11502.Rdata")
+# load(file= "./added_data/models/gam_trimmed_winter_11502.Rdata")
+# load(file= "./added_data/models/gam_interactions_summer_11502.Rdata")
+# load(file= "./added_data/models/gam_interactions_winter_11502.Rdata")
+
+
 
 # Server ---- 
 shinyServer(function(input, output) {
@@ -106,6 +117,58 @@ shinyServer(function(input, output) {
     }
     )
     
+    pick_model_summer <- reactive({
+      if (input$model_catchment %in% "Fränkische Saale / Salz") {
+        if (input$model_selection %in% "Full Model") {
+          return(gam_all_summer_11502)
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(gam_trimmed_summer_11502)
+        }
+        
+        if (input$model_selection %in% "Interactions") {
+          return(gam_interactions_summer_11502)
+        }
+      }
+      
+      if (input$model_catchment %in% "Iller Kempten") {
+        if (input$model_selection %in% "Full Model") {
+          return(gam_all_summer_11502)
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(gam_all_summer_11502)
+        }
+        
+        if (input$model_selection %in% "Interactions") {
+          return(gam_all_summer_11502)
+        }
+      }
+      
+      if (input$model_catchment %in% "Isar Mittenwald") {
+        if (input$model_selection %in% "Full Model") {
+          return(gam_all_summer_11502)
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(gam_all_summer_11502)
+        }
+        
+        if (input$model_selection %in% "Interactions") {
+          return(gam_all_summer_11502)
+        }
+      }
+    }
+    )
     output$qpr_hydro_summer <- renderDataTable(pick_qpr_summer_table())
     output$qpr_hydro_winter <- renderDataTable(pick_qpr_winter_table())
+    model_summary <- reactive({
+      req(input$model_summary) 
+      summary(pick_model_summer())})
+    reactive({
+    svg <- xmlSVG({
+      plot(pick_model_summer())
+    }, standalone = TRUE)})
+    
+    output$effect_plots <- renderSlickR(svg)
+    
+    output$model_summary_summer <- renderPrint({model_summary()})
 })
