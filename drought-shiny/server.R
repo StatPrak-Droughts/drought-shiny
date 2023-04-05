@@ -163,12 +163,5 @@ shinyServer(function(input, output) {
     model_summary <- reactive({
       req(input$model_summary) 
       summary(pick_model_summer())})
-    reactive({
-    svg <- xmlSVG({
-      plot(pick_model_summer())
-    }, standalone = TRUE)})
-    
-    output$effect_plots <- renderSlickR(svg)
-    
     output$model_summary_summer <- renderPrint({model_summary()})
 })
