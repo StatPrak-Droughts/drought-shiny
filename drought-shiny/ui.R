@@ -82,17 +82,38 @@ shinyUI(fluidPage(
                                                        choices = c("Fränkische Saale / Salz", "Iller Kempten", "Isar Mittenwald")),
                                            selectInput("model_selection", label = "Select model", choices = c("Full Model", "Trimmed Model", "Interactions")),
                                            checkboxInput("model_summary", label = "Show model summary?", FALSE),
-                                           checkboxInput("model_effects", label = "Show effect plots?", FALSE)
+                                           checkboxInput("effect_plots", label = "Show smooth term plots?", FALSE)
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
                                                        tabPanel("Summer",
                                                                 h1("Summer"),
-                                                                verbatimTextOutput("model_summary_summer")
+                                                                uiOutput("model_tab_summer"),
+                                                                verbatimTextOutput("model_summary_summer"),
+                                                                plotOutput("model_effect_summer_1"),
+                                                                plotOutput("model_effect_summer_2"),
+                                                                plotOutput("model_effect_summer_3"),
+                                                                plotOutput("model_effect_summer_4"),
+                                                                plotOutput("model_effect_summer_5"),
+                                                                plotOutput("model_effect_summer_6"),
+                                                                plotOutput("model_effect_summer_7"),
+                                                                plotOutput("model_effect_summer_8"),
+                                                                plotOutput("model_effect_summer_9"),
+                                                                plotOutput("model_effect_summer_10")
                                                                 ),
                                                        tabPanel("Winter", 
-                                                                h1("Winter")
-                                                                
+                                                                h1("Winter"),
+                                                                verbatimTextOutput("model_summary_winter"),
+                                                                plotOutput("model_effect_winter_1"),
+                                                                plotOutput("model_effect_winter_2"),
+                                                                plotOutput("model_effect_winter_3"),
+                                                                plotOutput("model_effect_winter_4"),
+                                                                plotOutput("model_effect_winter_5"),
+                                                                plotOutput("model_effect_winter_6"),
+                                                                plotOutput("model_effect_winter_7"),
+                                                                plotOutput("model_effect_winter_8"),
+                                                                plotOutput("model_effect_winter_9"),
+                                                                plotOutput("model_effect_winter_10")
                                                                 )
                                            )
                                        )
