@@ -7,6 +7,7 @@ library(shinycssloaders)
 library(tmap)
 library(tmaptools)
 library(plotly)
+library(mgcv)
 
 button_color_css <- "
 #DivCompClear, #FinderClear, #EnterTimes{
@@ -31,16 +32,34 @@ shinyUI(fluidPage(
                                    ),
                           tabPanel("Fränkische Saale Salz", icon = icon("water"),
                                        mainPanel(
-                                           h1("Hello")
+                                           h1("Fränkische Saale Salz"),
+                                           br(),
+                                           fluidRow(splitLayout(cellWidths = c("80%", "50%"), img(src = "f-saale_salz.jpg", height = 200, width = 400), tmapOutput("map_saale_salz", height = 200))),
+                                           br(),
+                                           fluidRow(p("Der Pegel Fränkische Saale Salz in Bayern trägt die ID-Nummer 20203 und befindet sich auf einer Höhe von 225.6 Metern über dem Meeresspiegel. Die umgebende Landschaft des Pegels ist vorwiegend von einer landwirtschaftlichen Nutzung geprägt, wobei die Landnutzungskategorie auf 18 festgelegt ist. Der Hang rund um den Pegel weist eine Steigung von 3.554 auf und der Boden hat eine Beschaffenheit von 58.
+
+Die Exposition des Pegels beträgt 114.5, was bedeutet, dass er einer östlichen Ausrichtung ausgesetzt ist. Diese Faktoren tragen zur Genauigkeit der Messung des Wasserstands bei und machen den Pegel Fränkische Saale Salz zu einem wichtigen Instrument zur Überwachung der Gewässerqualität in der Region. Darüber hinaus ermöglicht der Pegel eine präzise Beobachtung der Wasserstände, die wiederum bei der Planung von Hochwasserschutzmaßnahmen und anderen wasserbezogenen Aktivitäten hilft."))
                                        )
                            ),
                           tabPanel("Iller Kempten", icon = icon("water"),
-                                       mainPanel(
-                                           h1("hello")
-                                       )),
+                                   mainPanel(
+                                   h1("Iller Kempten"),
+                                   br(),
+                                   fluidRow(splitLayout(cellWidths = c("80%", "50%"), img(src = "iller_kempten.jpg", height = 200, width = 400), tmapOutput("map_iller_kempten", height = 200))),
+                                   br(),
+                                   p("Der Pegel Iller Kempten in Bayern wird durch die ID 11502 identifiziert und befindet sich auf einer Höhe von 662.6 Metern über dem Meeresspiegel. Die Umgebung des Pegels ist hauptsächlich durch eine Waldnutzung gekennzeichnet, wobei die landuse-Kategorie auf 1 festgelegt ist. Der Hang rund um den Pegel hat eine Steigung von 1.769 und der Boden weist eine Beschaffenheit von 57 auf.
+
+Die Exposition des Pegels beträgt 290.6, was bedeutet, dass er einer nordwestlichen Ausrichtung ausgesetzt ist. Diese Faktoren tragen zur Genauigkeit der Messung des Wasserstands bei, wodurch der Pegel Iller Kempten ein wichtiges Instrument für die Überwachung der Gewässerqualität in der Region darstellt. Darüber hinaus ermöglicht der Pegel eine genaue Beobachtung der Wasserstände und unterstützt damit eine bessere Planung von Hochwasserschutzmaßnahmen und anderer wasserbezogener Aktivitäten.")
+                          )),
                           tabPanel("Isar Mittenwald", icon = icon("water"),
                                        mainPanel(
-                                           h1("Hello")
+                                           h1("Isar Mittenwald"),
+                                           br(),
+                                           fluidRow(splitLayout(cellWidths = c("80%", "50%"), img(src = "isar_mittenwald.JPG", height = 200, width = 400), tmapOutput("map_isar_mittenwald", height = 200))),
+                                           br(),
+                                           p("Der Pegel Isar Mittenwald in Bayern hat die ID 10304 und liegt auf einer Höhe von 909.3 Metern über dem Meeresspiegel. Die Umgebung des Pegels ist geprägt von einer landwirtschaftlichen Nutzung mit einer landuse-Kategorie von 2. Die Landschaft rund um den Pegel weist einen Hang mit einer Steigung von 4.029 auf und der Boden hat eine Beschaffenheit von 54.
+
+Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er einer südwestlichen Ausrichtung ausgesetzt ist. All diese Faktoren tragen dazu bei, dass der Pegel Isar Mittenwald ein wichtiges Instrument für die Messung von Wasserständen in der Region darstellt und einen wesentlichen Beitrag zur Überwachung der Gewässerqualität leistet.")
                                        ))
                           ),
                navbarMenu("Descriptive Analysis", icon = icon("earth-europe"),
@@ -62,7 +81,7 @@ shinyUI(fluidPage(
                                        sidebarPanel(
                                            h1("Inputs"),
                                            selectInput("extreme_value_catchment", label = "Select Catchment", 
-                                                       choices = c("Fränkische Saale / Salz", "Iller Kempten", "Isar Mittenwald"))
+                                                       choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"))
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
@@ -79,7 +98,7 @@ shinyUI(fluidPage(
                                        sidebarPanel(
                                            h1("Inputs"),
                                            selectInput("model_catchment", label = "Select Catchment", 
-                                                       choices = c("Fränkische Saale / Salz", "Iller Kempten", "Isar Mittenwald")),
+                                                       choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald")),
                                            selectInput("model_selection", label = "Select model", choices = c("Full Model", "Trimmed Model", "Interactions")),
                                            checkboxInput("model_summary", label = "Show model summary?", FALSE),
                                            checkboxInput("effect_plots", label = "Show smooth term plots?", FALSE)
@@ -103,6 +122,7 @@ shinyUI(fluidPage(
                                                                 ),
                                                        tabPanel("Winter", 
                                                                 h1("Winter"),
+                                                                uiOutput("model_tab_winter"),
                                                                 verbatimTextOutput("model_summary_winter"),
                                                                 plotOutput("model_effect_winter_1"),
                                                                 plotOutput("model_effect_winter_2"),
@@ -123,9 +143,33 @@ shinyUI(fluidPage(
                navbarMenu("More", icon = icon("info"),
                           tabPanel("About", icon = icon("circle-question"),
                                    fluidRow(
-                                       h1("About")
-                                   )
-                          ))
+                                       h1("About"),
+                                       p("Dieses Datenanalyse-Projekt beschäftigt sich mit der Vorhersage von Niedrigwasser für drei Pegel (Isar, Iller und Fränkische Saale) in Bayern. Das Projekt wurde als Weiterführung eines statistischen Consulting-Projekts von Theresa Meier und Nikita Paschan im Rahmen des statistischen Praktikums bearbeitet. Das Ziel des Projekts ist es, die Treiber von Niedrigwasser zu verstehen und Vorhersagen mit bestimmten Treibervariablen zu treffen. Im Consulting-Projekt wurde ganz Bayern mit deutlich mehreren Pegeln modelliert und vorgestellt. Die Daten stammen aus dem ClimEx-Projekt, einer Zusammenarbeit zwischen Bayern und Québec, das ein hydrologisches Simulationsmodell verwendet, um den Einfluss des Klimawandels auf meteorologische und hydrologische Extremereignisse in Bayern zu untersuchen. Es wurden 50 verschiedene Sätze von simulierten Daten (Mitglieder) mit unterschiedlichen Startbedingungen verwendet, um die natürliche Variabilität zu berücksichtigen. Das Projekt hat somit wichtige Implikationen für das Wasserressourcenmanagement in Bayern."),
+                                       fluidRow(img(src = "Climex.png", height = 100, width = 250), img(src = "stablab.jpg", height = 150, width = 150))
+                                       )       
+                          ),
+                          tabPanel("Understanding the Models", icon = icon("lightbulb"),
+                                   fluidRow(
+                                     h1("Understanding the Models"),
+                                     p("Generalisierte additive Modelle (GAMs) sind eine Art von Regressionsanalyse, die verwendet wird, um Beziehungen zwischen einer Antwortvariable und einer oder mehreren Prädiktorvariablen zu modellieren. In der binomialen Regression ist die Antwortvariable binär (z.B. 0 oder 1), und die Prädiktorvariablen können entweder kontinuierlich oder kategorial sein.
+Die Interpretation von GAM-Koeffizienten in der binomialen Regression erfolgt in folgenden Schritten:"),
+                                     h2("Lineare GAM-Koeffizienten:"),
+                                     p("1. Zunächst ist es wichtig zu verstehen, dass in einer binomialen Regression mit einem linearen GAM-Term der Koeffizient die Log-Odds der Antwortvariable für eine Einheitserhöhung der Prädiktorvariable darstellt, während alle anderen Prädiktorvariablen konstant gehalten werden."), br(),
+                                     p("2. Das Vorzeichen des Koeffizienten gibt die Richtung der Beziehung zwischen der Prädiktorvariable und der Antwortvariable an. Ein positiver Koeffizient zeigt an, dass eine Erhöhung der Prädiktorvariable mit einer Erhöhung der Log-Odds der Antwortvariable verbunden ist, während ein negativer Koeffizient das Gegenteil anzeigt."), br(),
+                                     p("3. Die Größe des Koeffizienten spiegelt die Stärke der Beziehung zwischen der Prädiktorvariable und der Antwortvariable wider. Je größer der Koeffizient, desto stärker ist der Effekt der Prädiktorvariable auf die Antwortvariable."),
+                                     h2("Spline GAM-Koeffizienten:"),
+                                     p("1. In einer binomialen Regression mit einem Spline GAM-Term stellt der Koeffizient die Log-Odds der Antwortvariable für eine Einheitserhöhung der Prädiktorvariable dar, während alle anderen Prädiktorvariablen konstant gehalten werden, aber der Effekt der Prädiktorvariable auf die Antwortvariable mit einer Spline-Funktion modelliert wird."), br(),
+                                     p("2. Die Interpretation des Koeffizienten in einem Spline GAM-Term ist etwas komplexer als in einem linearen Term. Der Koeffizient stellt den durchschnittlichen Effekt der Prädiktorvariable auf die Log-Odds der Antwortvariable über den Bereich der Prädiktorvariable dar."), br(),
+                                     p("3. Das Vorzeichen und die Größe des Koeffizienten geben nach wie vor die Richtung und Stärke der Beziehung zwischen der Prädiktorvariable und der Antwortvariable an."), br(),
+                                     h2("Dos & dont's"),
+                                     h3("Dos"),
+                                     p("1. Man sollte fachspezifisches Wissen verwenden, um die Koeffizienten zu interpretieren. Das Verständnis des Kontexts der Daten und der analysierten Variablen ist entscheidend für eine genaue Interpretation."), br(),
+                                     p("2. Koeffizienten derselben Skala bei exakt gleichem Modell. (Einflussvariablen) dürfen miteinander verlgichen werden. Es darf aber beispielweise nicht der Koeffizient des Trimmed Modells mit dem Koeffizienten des Full Modells verglichen werden, auch wenn bei die gleiche Skala besitzen."),
+                                     h3("Dont's"),
+                                     p("1. Es dürfen keine Effekte unterschiedlicher Einflussvariablen miteinander verglichen werden. Die Koeffizienten Beta hänger von der Skala der Einflussvariable ab."), br(),
+                                     p("2. Es dürfen keine Effekte der gleichen Einflussvariablen zwischen Modellen verglichen werden, wenn die Modelle mit unterschiedlichen Einflussvariablen gefittet worden sind."), br(),
+                                     p("3. Der p-Wert ist NICHT geeignet eine Aussage über die Stärke des Effekts zu treffen. Dazu sollte Fachwissen verwendet werden, um die Relevanz der Koeffizienten einzuordnen.")
+                                   )))
     )
 )
 )

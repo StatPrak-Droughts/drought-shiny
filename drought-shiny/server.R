@@ -1,13 +1,13 @@
-library(shiny)
-library(tmap)
-tmap_options(check.and.fix = TRUE)
-library(tidyverse)
-library(sf)
-library(DT)
-library(mgcv)
-library(sjPlot)
-library(slickR)
-# Data Read in ----
+# library(shiny)
+# library(tmap)
+# tmap_options(check.and.fix = TRUE)
+# library(tidyverse)
+# library(sf)
+# library(DT)
+# library(mgcv)
+# library(sjPlot)
+# library(slickR)
+# # Data Read in ----
 # # # Read data
 # hydro_summer_20203 <- readRDS(file = "./data/hydro_summer_20203.RDS")
 # hydro_summer_11502 <- readRDS(file = "./data/hydro_summer_11502.RDS")
@@ -59,14 +59,27 @@ library(slickR)
 # qpr_hydro_winter_10304 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_10304.RDS")
 # qpr_hydro_winter_11502 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_11502.RDS")
 # qpr_hydro_winter_20203 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_20203.RDS")
-# load(file= "./added_data/models/gam_all_summer_11502.Rdata")
-# load(file= "./added_data/models/gam_all_winter_11502.Rdata")
-# load(file= "./added_data/models/gam_trimmed_summer_11502.Rdata")
-# load(file= "./added_data/models/gam_trimmed_winter_11502.Rdata")
-# load(file= "./added_data/models/gam_interactions_summer_11502.Rdata")
-# load(file= "./added_data/models/gam_interactions_winter_11502.Rdata")
-
-
+# # 11502 Models
+# load(file= "./added_data/models/11502/gam_all_summer_11502.Rdata")
+# load(file= "./added_data/models/11502/gam_all_winter_11502.Rdata")
+# load(file= "./added_data/models/11502/gam_trimmed_summer_11502.Rdata")
+# load(file= "./added_data/models/11502/gam_trimmed_winter_11502.Rdata")
+# load(file= "./added_data/models/11502/gam_interactions_summer_11502.Rdata")
+# load(file= "./added_data/models/11502/gam_interactions_winter_11502.Rdata")
+# # 10304 Models
+# load(file = "./added_data/models/10304/gam_all_summer_10304.Rdata")
+# load(file = "./added_data/models/10304/gam_all_winter_10304.Rdata")
+# load(file = "./added_data/models/10304/gam_selected_summer_10304.Rdata")
+# load(file = "./added_data/models/10304/gam_selected_winter_10304.Rdata")
+# load(file = "./added_data/models/10304/gam_selected_interac_summer_10304.Rdata")
+# load(file = "./added_data/models/10304/gam_selected_interac_winter_10304.Rdata")
+# # 20203 Models
+# load(file = "./added_data/models/20203/gam2_all_summer_20203.Rdata")
+# load(file = "./added_data/models/20203/gam2_all_winter_20203.Rdata")
+# load(file = "./added_data/models/20203/gam_selected_summer_20203.Rdata")
+# load(file = "./added_data/models/20203/gam_selected_winter_20203.Rdata")
+# load(file = "./added_data/models/20203/gam_selected_interact_summer_20203.Rdata")
+# load(file = "./added_data/models/20203/gam_selected_interact_winter_20203.Rdata")
 
 # Server ---- 
 shinyServer(function(input, output) {
@@ -79,9 +92,11 @@ shinyServer(function(input, output) {
             tm_shape(pegel_prop_sf)+
             tm_markers(size = 0.3)
     )
+   
+    
     # QPR Tab ----
     pick_qpr_summer_table <-  reactive({
-      if (input$extreme_value_catchment %in% "Fränkische Saale / Salz") {
+      if (input$extreme_value_catchment %in% "Fränkische Saale Salz") {
         return(datatable(qpr_hydro_summer_10304, rownames = TRUE, options = list(scrollX = TRUE,
                                                                           scrollY = TRUE,
                                                                           autoWidth = TRUE)))
@@ -100,7 +115,7 @@ shinyServer(function(input, output) {
     )
     
     pick_qpr_winter_table <-  reactive({
-      if (input$extreme_value_catchment %in% "Fränkische Saale / Salz") {
+      if (input$extreme_value_catchment %in% "Fränkische Saale Salz") {
         return(datatable(qpr_hydro_winter_10304, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
                                                                                  autoWidth = TRUE)))
@@ -119,56 +134,20 @@ shinyServer(function(input, output) {
     )
     output$qpr_hydro_summer <- renderDataTable(pick_qpr_summer_table())
     output$qpr_hydro_winter <- renderDataTable(pick_qpr_winter_table())
-    # Model tables
-    output$model_tab_summer <- renderUI({
-      if (input$model_catchment %in% "Fränkische Saale / Salz") {
-        if (input$model_selection %in% "Full Model") {
-          h2("Table of Model")
-        }
-        if (input$model_selection %in% "Trimmed Model") {
-          h2("Table of Model")
-        }
-        if (input$model_selection %in% "Interactions") {
-          h2("Table of Model")
-        }
-      }
-      if (input$model_catchment %in% "Iller Kempten") {
-        if (input$model_selection %in% "Full Model") {
-          return(HTML(as.character(tab_model(gam_all_summer_11502))[4][1]))
-        }
-        if (input$model_selection %in% "Trimmed Model") {
-          return(HTML(as.character(tab_model(gam_trimmed_summer_11502))[4][1]))
-        }
-        if (input$model_selection %in% "Interactions") {
-          return(HTML(as.character(tab_model(gam_interactions_summer_11502))[4][1]))
-        }
-      }
-      if (input$model_catchment %in% "Isar Mittenwald") {
-        if (input$model_selection %in% "Full Model") {
-          h2("Table of Model")
-        }
-        if (input$model_selection %in% "Trimmed Model") {
-          h2("Table of Model")
-        }
-        
-        if (input$model_selection %in% "Interactions") {
-          h2("Table of Model")
-        }
-      }
-    })
     
     # Model Summaries ----
     output$model_summary_summer <- renderPrint({
       req(input$model_summary)
-      if (input$model_catchment %in% "Fränkische Saale / Salz") {
+      
+      if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_summer_11502))
+          return(summary(gam2_all_summer_20203))
         }
         if (input$model_selection %in% "Trimmed Model") {
-          return(summary(gam_trimmed_summer_11502))
+          return(summary(gam_selected_summer_20203))
         }
         if (input$model_selection %in% "Interactions") {
-          return(gam_interactions_summer_11502)
+          return(summary(gam_selected_interact_summer_20203))
         }
       }
       if (input$model_catchment %in% "Iller Kempten") {
@@ -184,33 +163,33 @@ shinyServer(function(input, output) {
       }
       if (input$model_catchment %in% "Isar Mittenwald") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_summer_11502))
+          return(summary(gam_all_summer_10304))
         }
         if (input$model_selection %in% "Trimmed Model") {
-          return(summary(gam_trimmed_summer_11502))
+          return(summary(gam_selected_summer_10304))
         }
         
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_interactions_summer_11502))
+          return(summary(gam_selected_interac_summer_10304))
         }
       }
     })
     output$model_summary_winter <- renderPrint({
       req(input$model_summary)
-      if (input$model_catchment %in% "Fränkische Saale / Salz") {
+      if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_winter_11502))
+          return(summary(gam2_all_winter_20203))
         }
         if (input$model_selection %in% "Trimmed Model") {
-          return(summary(gam_trimmed_winter_11502))
+          return(summary(gam_selected_winter_20203))
         }
         if (input$model_selection %in% "Interactions") {
-          return(gam_interactions_winter_11502)
+          return(summary(gam_selected_interact_winter_20203))
         }
       }
       if (input$model_catchment %in% "Iller Kempten") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_winter_11502))
+          return(summary(gam_all_winter_10304))
         }
         if (input$model_selection %in% "Trimmed Model") {
           return(summary(gam_trimmed_winter_11502))
@@ -221,14 +200,14 @@ shinyServer(function(input, output) {
       }
       if (input$model_catchment %in% "Isar Mittenwald") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_winter_11502))
+          return(summary(gam_all_winter_10304))
         }
         if (input$model_selection %in% "Trimmed Model") {
-          return(summary(gam_trimmed_winter_11502))
+          return(summary(gam_selected_winter_10304))
         }
         
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_interactions_winter_11502))
+          return(summary(gam_selected_interac_winter_10304))
         }
       }
     })
@@ -240,37 +219,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_summer_20203, select = 1, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 1, ylim = c(-200, 50))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 1, ylim = c(-200, 50))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_summer_20203, select = 1, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_summer_11502, select = 1, ylim = c(-200, 50))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_summer_10304, select = 1, ylim = c(-200, 50))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 1, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_summer_11502, select = 1, ylim = c(-200, 50))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 1, ylim = c(-200, 50))
         }
       }
     })
@@ -279,37 +258,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_summer_20203, select = 2, ylim = c(-20, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 2, ylim = c(-20, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 2, ylim = c(-20, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 2, ylim = c(-20, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_summer_11502, select = 2, ylim = c(-20, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 2, ylim = c(-20, 15))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 2, ylim = c(-20, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_summer_11502, select = 2, ylim = c(-20, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 2, ylim = c(-20, 15))
         }
       }
     })
@@ -318,37 +297,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_summer_20203, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 3, ylim = c(-15, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_summer_20203, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_summer_11502, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_summer_10304, select = 3, ylim = c(-15, 15))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_summer_11502, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 3, ylim = c(-15, 15))
         }
       }
     })
@@ -357,37 +336,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_summer_20203, select = 4, ylim = c(-100, 40))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 4, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 4, ylim = c(-10, 10))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_summer_20203, select = 4, ylim = c(-100, 40))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_summer_11502, select = 4, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_summer_10304, select = 4, ylim = c(-10, 15))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 4, ylim = c(-100, 40))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_summer_11502, select = 4, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 4, ylim = c(-10, 15))
         }
       }
     })
@@ -396,37 +375,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_summer_20203, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 5, ylim = c(-20, 20))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_summer_20203, select = 5, ylim = c(-50000, 100))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 5, ylim = c(-30, 20))
+          plot(gam_trimmed_summer_11502, select = 5, ylim = c(-800, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_summer_10304, select = 5, ylim = c(-30, 20))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 5, ylim = c(-50000, 100))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_summer_11502, select = 5, ylim = c(-30, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 5, ylim = c(-30, 20))
         }
       }
     })
@@ -435,37 +414,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_summer_20203, select = 6, ylim = c(-100, 50))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 6, ylim = c(-500, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 6, ylim = c(-500, 30))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
-        }
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_summer_20203, select = 6, ylim = c(-10, 10))        
+          }
         if (input$model_catchment %in% "Iller Kempten") {
-          
+          plot(gam_trimmed_summer_11502, select = 6, ylim = c(-40, 20))        
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+     
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 6, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 6, ylim = c(-10, 10))
+          plot(gam_interactions_summer_11502, select = 6, ylim = c(-20, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 6, ylim = c(-40, 40))
         }
       }
     })
@@ -474,37 +453,34 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 7, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 7, ylim = c(-50, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          
+          plot(gam_trimmed_summer_11502, select = 7, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 7, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_summer_11502, select = 7, ylim = c(-120, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_summer_10304, select = 7, ylim = c(-30, 15))
         }
       }
     })
@@ -513,37 +489,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 8, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 8, ylim = c(-50, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
+          plot(gam_trimmed_summer_11502, select = 8, ylim = c(-30, 15))
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_summer_20203, select = 8, ylim = c(-20, 20))
+          
         }
         if (input$model_catchment %in% "Iller Kempten") {
+          plot(gam_interactions_summer_11502, select = 8, ylim = c(-20, 20))
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
     })
@@ -552,37 +528,33 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 9, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 9, ylim = c(-15, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-
+          plot(gam_interactions_summer_11502, select = 9, ylim = c(-90, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          
         }
       }
     })
@@ -591,77 +563,73 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
     ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_summer_11502, select = 10, ylim = c(-150, 100))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_summer_10304, select = 10, ylim = c(-150, 100))
         }}
     ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
     ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
 
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       })
     ## Winter ----
+    # Selected Saale 6 Isar 6 Iller
     #### Effect Plot 1 ----
     output$model_effect_winter_1 <- renderPlot({
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_winter_20203, select = 1, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 1, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 1, ylim = c(-20, 20))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_winter_20203, select = 1, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 1, ylim = c(-30, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_summer_10304, select = 1, ylim = c(-240, 10))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 1, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 1, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 1, ylim = c(-50, 20))
         }
       }
     })
@@ -670,37 +638,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_winter_20203, select = 2, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 2, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 2, ylim = c(-10, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_winter_20203, select = 2, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 2, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_summer_10304, select = 2, ylim = c(-10, 10))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 2, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 2, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 2, ylim = c(-500, 1000))
         }
       }
     })
@@ -709,37 +677,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_winter_20203, select = 3, ylim = c(-15, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 3, ylim = c(-15, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_winter_20203, select = 3, ylim = c(-20, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_winter_10304, select = 3, ylim = c(-20, 10))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 3, ylim = c(-50, 50))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 3, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 3, ylim = c(-50, 50))
         }
       }
     })
@@ -748,37 +716,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_winter_20203, select = 4, ylim = c(-20, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 4, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 4, ylim = c(-10, 10))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_winter_20203, select = 4, ylim = c(-30, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 4, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_winter_10304, select = 4, ylim = c(-10, 10))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 4, ylim = c(-1700, 1000))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 4, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 4, ylim = c(-3200, 1000))
         }
       }
     })
@@ -787,37 +755,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_winter_20203, select = 5, ylim = c(-900, 500))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 5, ylim = c(-40, 20))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_winter_20203, select = 5, ylim = c(-800, 50))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_winter_10304, select = 5, ylim = c(-30, 20))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 5, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 5, ylim = c(-2500, 100))
         }
       }
     })
@@ -826,37 +794,37 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_winter_20203, select = 6, ylim = c(-30, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 6, ylim = c(-500, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 6, ylim = c(-10, 10))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_winter_20203, select = 6, ylim = c(-20, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 6, ylim = c(-500, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_winter_10304, select = 6, ylim = c(-200, 60))
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 6, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_summer_11502, select = 6, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 6, ylim = c(-200, 250))
         }
       }
     })
@@ -865,38 +833,36 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam2_all_winter_20203, select = 7, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 7, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 7, ylim = c(-50, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 7, ylim = c(-50, 15))
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 7, ylim = c(-700, 100))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 7, ylim = c(-60, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 7, ylim = c(-500, 250))
         }
       }
     })
@@ -905,39 +871,35 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 8, ylim = c(-60, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 8, ylim = c(-150, 40))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_trimmed_winter_11502, select = 8, ylim = c(-60, 15))
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
+          plot(gam_selected_interact_winter_20203, select = 8, ylim = c(-100, 100))
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 8, ylim = c(-60, 15))
-          
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_selected_interac_winter_10304, select = 8, ylim = c(-150, 80))
         }
       }
     })
@@ -946,37 +908,32 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 9, ylim = c(-15, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 9, ylim = c(-15, 15))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 9, ylim = c(-60, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
     })
@@ -985,38 +942,135 @@ shinyServer(function(input, output) {
       req(input$effect_plots)
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_all_winter_11502, select = 10, ylim = c(-150, 100))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+          plot(gam_all_winter_10304, select = 10, ylim = c(-400, 100))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
-        if(input$model_catchment %in% "Fränkische Saale / Salz"){
-          plot(1:10)
+        if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
           plot(gam_interactions_winter_11502, select = 10, ylim = c(-10, 10))
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(1:10)
+        }
+      }
+    })
+    
+    
+    ## Saale Salz ----
+    output$map_saale_salz <- renderTmap(
+      tm_shape(hydro_bavaria)+
+        tm_polygons(id = "NameString")+
+        tm_shape(waterways_three)+
+        tm_lines(col = "blue")+
+        tm_shape(pegel_prop_sf[3,])+
+        tm_markers(size = 0.3)
+    )
+    ## Iller Kempten ----
+    output$map_iller_kempten <- renderTmap(
+      tm_shape(hydro_bavaria)+
+        tm_polygons(id = "NameString")+
+        tm_shape(waterways_three)+
+        tm_lines(col = "blue")+
+        tm_shape(pegel_prop_sf[2,])+
+        tm_markers(size = 0.3)
+    )
+    ## Isar Mittenwald ----
+    output$map_isar_mittenwald <- renderTmap(
+      tm_shape(hydro_bavaria)+
+        tm_polygons(id = "NameString")+
+        tm_shape(waterways_three)+
+        tm_lines(col = "blue")+
+        tm_shape(pegel_prop_sf[1,])+
+        tm_markers(size = 0.3)
+    )
+    # Model tables
+    output$model_tab_summer <- renderUI({
+      if (input$model_catchment %in% "Fränkische Saale Salz") {
+        if (input$model_selection %in% "Full Model") {
+          return(HTML(as.character(tab_model(gam2_all_summer_20203, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(HTML(as.character(tab_model(gam_selected_summer_20203, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Interactions") {
+          return(HTML(as.character(tab_model(gam_selected_interact_summer_20203, show.aic = TRUE))[4][1]))
+        }
+      }
+      if (input$model_catchment %in% "Iller Kempten") {
+        if (input$model_selection %in% "Full Model") {
+          return(HTML(as.character(tab_model(gam_all_summer_11502, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(HTML(as.character(tab_model(gam_trimmed_summer_11502, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Interactions") {
+          return(HTML(as.character(tab_model(gam_interactions_summer_11502, show.aic = TRUE))[4][1]))
+        }
+      }
+      if (input$model_catchment %in% "Isar Mittenwald") {
+        if (input$model_selection %in% "Full Model") {
+          return(HTML(as.character(tab_model(gam_all_summer_10304, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(HTML(as.character(tab_model(gam_selected_summer_10304, show.aic = TRUE))[4][1]))
+        }
+        
+        if (input$model_selection %in% "Interactions") {
+          return(HTML(as.character(tab_model(gam_selected_interac_summer_10304, show.aic = TRUE))[4][1]))
+        }
+      }
+    })
+    output$model_tab_winter <- renderUI({
+      if (input$model_catchment %in% "Fränkische Saale Salz") {
+        if (input$model_selection %in% "Full Model") {
+          return(HTML(as.character(tab_model(gam2_all_winter_20203, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(HTML(as.character(tab_model(gam_selected_winter_20203, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Interactions") {
+          return(HTML(as.character(tab_model(gam_selected_interact_winter_20203, show.aic = TRUE))[4][1]))
+        }
+      }
+      if (input$model_catchment %in% "Iller Kempten") {
+        if (input$model_selection %in% "Full Model") {
+          return(HTML(as.character(tab_model(gam_all_winter_11502, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(HTML(as.character(tab_model(gam_trimmed_winter_11502, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Interactions") {
+          return(HTML(as.character(tab_model(gam_interactions_winter_11502, show.aic = TRUE))[4][1]))
+        }
+      }
+      if (input$model_catchment %in% "Isar Mittenwald") {
+        if (input$model_selection %in% "Full Model") {
+          return(HTML(as.character(tab_model(gam_all_winter_10304, show.aic = TRUE))[4][1]))
+        }
+        if (input$model_selection %in% "Trimmed Model") {
+          return(HTML(as.character(tab_model(gam_selected_winter_10304, show.aic = TRUE))[4][1]))
+        }
+        
+        if (input$model_selection %in% "Interactions") {
+          return(HTML(as.character(tab_model(gam_selected_interac_winter_10304, show.aic = TRUE))[4][1]))
         }
       }
     })
