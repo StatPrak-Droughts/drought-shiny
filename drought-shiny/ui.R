@@ -8,6 +8,7 @@ library(tmap)
 library(tmaptools)
 library(plotly)
 library(mgcv)
+library(tidyverse)
 
 button_color_css <- "
 #DivCompClear, #FinderClear, #EnterTimes{
@@ -67,15 +68,14 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                    tags$style(button_color_css),
                                    sidebarLayout(
                                        sidebarPanel(
-                                           h1("Inputs")
+                                           h1("Inputs"),
+                                           selectInput("variable_min_max_plot", label = "Select variable of interest", choices = c("groundwaterdepth", "soilwater", "snowstorage", "airtmp", "precipitation", "glorad", "infiltration"), multiple = FALSE),
+                                           checkboxInput("facet_hydro_year", label = "Facet by hydrological year?", FALSE)
                                        ),
-                                       mainPanel(
-                                           tabsetPanel(type = "tabs",
-                                                       tabPanel("Summer", h1("Summer Plot")),
-                                                       tabPanel("Winter", h1("Winter Plot"))
-                                           )
+                                       mainPanel(h1("Minima"), plotOutput("min_plot"), br(), h1("Maxima"), plotOutput("max_plot")
                                        )
-                                   )),
+                                       )
+                                   ),
                           tabPanel("Extreme Value Analysis", icon = icon("chart-simple"),
                                    sidebarLayout(
                                        sidebarPanel(
