@@ -1,43 +1,43 @@
-# Load tables
-table_yearly_avg_min_groundwaterdepth <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_groundwaterdepth.RDS")
-table_yearly_avg_max_groundwaterdepth <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_groundwaterdepth.RDS")
-table_yearly_avg_min_soilwater <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_soilwater.RDS")
-table_yearly_avg_max_soilwater <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_soilwater.RDS")
-table_yearly_avg_min_snowstorage <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_snowstorage.RDS")
-table_yearly_avg_max_snowstorage <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_snowstorage.RDS")
-table_yearly_avg_min_airtmp <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_airtmp.RDS")
-table_yearly_avg_max_airtmp <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_airtmp.RDS")
-table_yearly_avg_max_precip <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_precip.RDS")
-table_yearly_avg_min_precip <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_precip.RDS")
-table_yearly_avg_max_glorad <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_glorad.RDS")
-table_yearly_avg_min_glorad <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_glorad.RDS")
-table_yearly_avg_max_relhum <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_relhum.RDS")
-table_yearly_avg_min_relhum <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_relhum.RDS")
-table_yearly_avg_max_infiltration <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_infiltration.RDS")
-table_yearly_avg_min_infiltration <- 
-  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_infiltration.RDS")
+# # Load tables
+# table_yearly_avg_min_groundwaterdepth <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_groundwaterdepth.RDS")
+# table_yearly_avg_max_groundwaterdepth <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_groundwaterdepth.RDS")
+# table_yearly_avg_min_soilwater <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_soilwater.RDS")
+# table_yearly_avg_max_soilwater <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_soilwater.RDS")
+# table_yearly_avg_min_snowstorage <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_snowstorage.RDS")
+# table_yearly_avg_max_snowstorage <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_snowstorage.RDS")
+# table_yearly_avg_min_airtmp <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_airtmp.RDS")
+# table_yearly_avg_max_airtmp <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_airtmp.RDS")
+# table_yearly_avg_max_precip <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_precip.RDS")
+# table_yearly_avg_min_precip <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_precip.RDS")
+# table_yearly_avg_max_glorad <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_glorad.RDS")
+# table_yearly_avg_min_glorad <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_glorad.RDS")
+# table_yearly_avg_max_relhum <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_relhum.RDS")
+# table_yearly_avg_min_relhum <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_relhum.RDS")
+# table_yearly_avg_max_infiltration <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_infiltration.RDS")
+# table_yearly_avg_min_infiltration <- 
+#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_infiltration.RDS")
 
 # Plots (min and max):
 
 # TODO: Entfernen von "facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))"
 # mit zusätzlichem Kasten mit Haken: "Nach hydrologischem Halbjahr aufteilen?"
 
-# groundwaterdepth
+# groundwaterdepth ----
 ggplot(data = table_yearly_avg_min_groundwaterdepth, mapping = aes(x = YY, y = avg_min_groundwaterdepth, color = waterlevel)) +
   geom_line() +
   geom_point() +
@@ -62,7 +62,7 @@ ggplot(data = table_yearly_avg_max_groundwaterdepth, mapping = aes(x = YY, y = a
   scale_color_brewer(palette = "Dark2") +
   facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
 
-# soilwater
+# soilwater----
 ggplot(data = table_yearly_avg_min_soilwater, mapping = aes(x = YY, y = avg_min_soilwater, color = waterlevel)) +
   geom_line() +
   geom_point() +
@@ -87,7 +87,7 @@ ggplot(data = table_yearly_avg_max_soilwater, mapping = aes(x = YY, y = avg_max_
   scale_color_brewer(palette = "Dark2") +
   facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
 
-# snowstorage
+# snowstorage ----
 ggplot(data = table_yearly_avg_min_snowstorage, mapping = aes(x = YY, y = avg_min_snowstorage, color = waterlevel)) +
   geom_line() +
   geom_point() +
@@ -112,7 +112,7 @@ ggplot(data = table_yearly_avg_max_snowstorage, mapping = aes(x = YY, y = avg_ma
   scale_color_brewer(palette = "Dark2") +
   facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
 
-# airtmp
+# airtmp ----
 ggplot(data = table_yearly_avg_min_airtmp, mapping = aes(x = YY, y = avg_min_airtmp, color = waterlevel)) +
   geom_line() +
   geom_point() +
@@ -137,7 +137,7 @@ ggplot(data = table_yearly_avg_max_airtmp, mapping = aes(x = YY, y = avg_max_air
   scale_color_brewer(palette = "Dark2") +
   facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
 
-# precip
+# precip ----
 ggplot(data = table_yearly_avg_min_precip, mapping = aes(x = YY, y = avg_min_precip, color = waterlevel)) +
   geom_line() +
   geom_point() +
@@ -162,7 +162,7 @@ ggplot(data = table_yearly_avg_max_precip, mapping = aes(x = YY, y = avg_max_pre
   scale_color_brewer(palette = "Dark2") +
   facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
 
-# glorad
+# glorad ----
 ggplot(data = table_yearly_avg_min_glorad, mapping = aes(x = YY, y = avg_min_glorad, color = waterlevel)) +
   geom_line() +
   geom_point() +
