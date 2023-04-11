@@ -226,7 +226,7 @@ shinyServer(function(input, output) {
           plot(gam_all_summer_11502, select = 1, ylim = c(-200, 50))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 1, ylim = c(-200, 50))
+          plot(gam_all_summer_10304, select = 1, ylim = c(-300, 200))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -237,7 +237,7 @@ shinyServer(function(input, output) {
           plot(gam_trimmed_summer_11502, select = 1, ylim = c(-200, 50))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 1, ylim = c(-200, 50))
+          plot(gam_selected_summer_10304, select = 1, ylim = c(-300, 200))
         }
       }
       ##### Interactions ----
@@ -249,7 +249,7 @@ shinyServer(function(input, output) {
           plot(gam_interactions_summer_11502, select = 1, ylim = c(-200, 50))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 1, ylim = c(-200, 50))
+          plot(gam_selected_interac_summer_10304, select = 1, ylim = c(-300, 200))
         }
       }
     })
@@ -421,7 +421,7 @@ shinyServer(function(input, output) {
           plot(gam_all_summer_11502, select = 6, ylim = c(-500, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 6, ylim = c(-500, 30))
+          plot(gam_all_summer_10304, select = 6, ylim = c(-100, 100))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -606,7 +606,7 @@ shinyServer(function(input, output) {
           plot(gam_all_winter_11502, select = 1, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 1, ylim = c(-20, 20))
+          plot(gam_all_winter_10304, select = 1, ylim = c(-40, 40))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -617,7 +617,7 @@ shinyServer(function(input, output) {
           plot(gam_trimmed_winter_11502, select = 1, ylim = c(-30, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 1, ylim = c(-240, 10))
+          plot(gam_selected_summer_10304, select = 1, ylim = c(-300, 100))
         }
       }
       ##### Interactions ----
@@ -629,7 +629,7 @@ shinyServer(function(input, output) {
           plot(gam_interactions_winter_11502, select = 1, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 1, ylim = c(-50, 20))
+          plot(gam_selected_interac_winter_10304, select = 1, ylim = c(-50, 50))
         }
       }
     })
@@ -645,7 +645,7 @@ shinyServer(function(input, output) {
           plot(gam_all_winter_11502, select = 2, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 2, ylim = c(-10, 15))
+          plot(gam_all_winter_10304, select = 2, ylim = c(-10, 20))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -723,7 +723,7 @@ shinyServer(function(input, output) {
           plot(gam_all_winter_11502, select = 4, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 4, ylim = c(-10, 10))
+          plot(gam_all_winter_10304, select = 4, ylim = c(-20, 20))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -762,7 +762,7 @@ shinyServer(function(input, output) {
           plot(gam_all_winter_11502, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 5, ylim = c(-40, 20))
+          plot(gam_all_winter_10304, select = 5, ylim = c(-10, 10))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -773,7 +773,7 @@ shinyServer(function(input, output) {
           plot(gam_trimmed_winter_11502, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_winter_10304, select = 5, ylim = c(-30, 20))
+          plot(gam_selected_winter_10304, select = 5, ylim = c(-50, 20))
         }
       }
       ##### Interactions ----
@@ -785,7 +785,7 @@ shinyServer(function(input, output) {
           plot(gam_interactions_winter_11502, select = 5, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 5, ylim = c(-2500, 100))
+          plot(gam_selected_interac_winter_10304, select = 5, ylim = c(-3000, 1000))
         }
       }
     })
@@ -801,7 +801,7 @@ shinyServer(function(input, output) {
           plot(gam_all_winter_11502, select = 6, ylim = c(-500, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 6, ylim = c(-10, 10))
+          plot(gam_all_winter_10304, select = 6, ylim = c(-100, 10))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -812,7 +812,7 @@ shinyServer(function(input, output) {
           plot(gam_trimmed_winter_11502, select = 6, ylim = c(-500, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_winter_10304, select = 6, ylim = c(-200, 60))
+          plot(gam_selected_winter_10304, select = 6, ylim = c(-500, 150))
         }
       }
       ##### Interactions ----
@@ -824,7 +824,7 @@ shinyServer(function(input, output) {
           plot(gam_interactions_summer_11502, select = 6, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 6, ylim = c(-200, 250))
+          plot(gam_selected_interac_winter_10304, select = 6, ylim = c(-200, 300))
         }
       }
     })
@@ -840,7 +840,7 @@ shinyServer(function(input, output) {
           plot(gam_all_winter_11502, select = 7, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 7, ylim = c(-50, 15))
+          plot(gam_all_winter_10304, select = 7, ylim = c(-20, 20))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -877,7 +877,7 @@ shinyServer(function(input, output) {
           plot(gam_all_winter_11502, select = 8, ylim = c(-60, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 8, ylim = c(-150, 40))
+          plot(gam_all_winter_10304, select = 8, ylim = c(-300, 100))
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
