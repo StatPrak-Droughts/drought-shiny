@@ -1,14 +1,14 @@
-# library(shiny)
-# library(tmap)
-# tmap_options(check.and.fix = TRUE)
-# library(tidyverse)
-# library(sf)
-# library(DT)
-# library(mgcv)
-# library(sjPlot)
-# library(slickR)
-# # Data Read in ----
-# # # Read data
+library(shiny)
+library(tmap)
+tmap_options(check.and.fix = TRUE)
+library(tidyverse)
+library(sf)
+library(DT)
+library(mgcv)
+library(sjPlot)
+library(slickR)
+# Data Read in ----
+# # Read data
 # hydro_summer_20203 <- readRDS(file = "./data/hydro_summer_20203.RDS")
 # hydro_summer_11502 <- readRDS(file = "./data/hydro_summer_11502.RDS")
 # hydro_summer_10304 <- readRDS(file = "./data/hydro_summer_10304.RDS")
