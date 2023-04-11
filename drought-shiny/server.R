@@ -844,7 +844,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_summer_20203, select = 5, ylim = c(-50000, 100))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 5, ylim = c(-800, 20))
+          plot(gam_trimmed_summer_11502, select = 5, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_summer_10304, select = 5, ylim = c(-30, 20))
@@ -872,7 +872,7 @@ shinyServer(function(input, output) {
           plot(gam2_all_summer_20203, select = 6, ylim = c(-100, 50))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 6, ylim = c(-500, 30))
+          plot(gam_all_summer_11502, select = 6, ylim = c(-50, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_all_summer_10304, select = 6, ylim = c(-500, 30))
@@ -1096,7 +1096,7 @@ shinyServer(function(input, output) {
           plot(gam2_all_winter_20203, select = 2, ylim = c(-10, 15))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 2, ylim = c(-10, 15))
+          plot(gam_all_winter_11502, select = 2, ylim = c(-50, 50))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_all_winter_10304, select = 2, ylim = c(-10, 15))
@@ -1107,7 +1107,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_winter_20203, select = 2, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 2, ylim = c(-10, 15))
+          plot(gam_trimmed_winter_11502, select = 2, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_summer_10304, select = 2, ylim = c(-10, 10))
@@ -1119,7 +1119,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_interact_winter_20203, select = 2, ylim = c(-50, 20))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 2, ylim = c(-10, 15))
+          plot(gam_interactions_winter_11502, select = 2, ylim = c(-20, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_interac_winter_10304, select = 2, ylim = c(-500, 1000))
@@ -1135,7 +1135,7 @@ shinyServer(function(input, output) {
           plot(gam2_all_winter_20203, select = 3, ylim = c(-15, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 3, ylim = c(-15, 15))
+          plot(gam_all_winter_11502, select = 3, ylim = c(-500, 100))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_all_winter_10304, select = 3, ylim = c(-15, 15))
@@ -1146,7 +1146,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_winter_20203, select = 3, ylim = c(-20, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 3, ylim = c(-15, 15))
+          plot(gam_trimmed_winter_11502, select = 3, ylim = c(-500, 100))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_winter_10304, select = 3, ylim = c(-20, 10))
@@ -1158,7 +1158,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_interact_winter_20203, select = 3, ylim = c(-50, 50))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 3, ylim = c(-15, 15))
+          plot(gam_interactions_winter_11502, select = 3, ylim = c(-500, 100))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_interac_winter_10304, select = 3, ylim = c(-50, 50))
@@ -1174,7 +1174,7 @@ shinyServer(function(input, output) {
           plot(gam2_all_winter_20203, select = 4, ylim = c(-20, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 4, ylim = c(-10, 10))
+          plot(gam_all_winter_11502, select = 4, ylim = c(-50, 10))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_all_winter_10304, select = 4, ylim = c(-10, 10))
@@ -1185,7 +1185,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_winter_20203, select = 4, ylim = c(-30, 30))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 4, ylim = c(-10, 15))
+          plot(gam_trimmed_winter_11502, select = 4, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_winter_10304, select = 4, ylim = c(-10, 10))
@@ -1197,7 +1197,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_interact_winter_20203, select = 4, ylim = c(-1700, 1000))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 4, ylim = c(-10, 15))
+          plot(gam_interactions_winter_11502, select = 4, ylim = c(-50, 15))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_interac_winter_10304, select = 4, ylim = c(-3200, 1000))
@@ -1213,7 +1213,7 @@ shinyServer(function(input, output) {
           plot(gam2_all_winter_20203, select = 5, ylim = c(-900, 500))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 5, ylim = c(-20, 20))
+          plot(gam_all_winter_11502, select = 5, ylim = c(-70, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_all_winter_10304, select = 5, ylim = c(-40, 20))
@@ -1224,7 +1224,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_winter_20203, select = 5, ylim = c(-800, 50))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 5, ylim = c(-20, 20))
+          plot(gam_trimmed_winter_11502, select = 5, ylim = c(-70, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_winter_10304, select = 5, ylim = c(-30, 20))
@@ -1236,7 +1236,7 @@ shinyServer(function(input, output) {
           plot(gam_selected_interact_winter_20203, select = 5, ylim = c(-10, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 5, ylim = c(-20, 20))
+          plot(gam_interactions_winter_11502, select = 5, ylim = c(-70, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_selected_interac_winter_10304, select = 5, ylim = c(-2500, 100))
@@ -1252,7 +1252,7 @@ shinyServer(function(input, output) {
           plot(gam2_all_winter_20203, select = 6, ylim = c(-30, 10))
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 6, ylim = c(-500, 30))
+          plot(gam_all_winter_11502, select = 6, ylim = c(-50, 30))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           plot(gam_all_winter_10304, select = 6, ylim = c(-10, 10))
