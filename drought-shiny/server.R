@@ -312,8 +312,8 @@ shinyServer(function(input, output) {
           min_plot_infiltration_facet <- ggplot(data = table_yearly_avg_min_infiltration, mapping = aes(x = YY, y = avg_min_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
             theme(text = element_text(size = 15),
@@ -325,8 +325,8 @@ shinyServer(function(input, output) {
           min_plot_infiltration <- ggplot(data = table_yearly_avg_min_infiltration, mapping = aes(x = YY, y = avg_min_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
             theme(text = element_text(size = 15),
@@ -522,8 +522,8 @@ shinyServer(function(input, output) {
           max_plot_infiltration_facet <- ggplot(data = table_yearly_avg_max_infiltration, mapping = aes(x = YY, y = avg_max_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
             theme(text = element_text(size = 15),
@@ -535,8 +535,8 @@ shinyServer(function(input, output) {
           max_plot_infiltration <- ggplot(data = table_yearly_avg_max_infiltration, mapping = aes(x = YY, y = avg_max_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
             theme(text = element_text(size = 15),
