@@ -119,7 +119,8 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                                        choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald")),
                                            selectInput("model_selection", label = "Wähle Modell", choices = c("Full Model", "Trimmed Model", "Interactions")),
                                            checkboxInput("model_summary", label = "Zeige Modell Zusammenfassung?", FALSE),
-                                           checkboxInput("effect_plots", label = "Zeige Effekt Plots?", FALSE)
+                                           checkboxInput("effect_plots", label = "Zeige Effekt Plots?", FALSE),
+                                           uiOutput("slider_ui")
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
