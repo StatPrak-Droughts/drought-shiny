@@ -22,12 +22,12 @@ font-size: 15px;
 shinyUI(fluidPage(
     navbarPage(id = "navbar", title = div(img(src='icon.png', style="background-color: transparent; margin-top: -10px;", height = 35), tags$a(href= "https://github.com/StatPrak-Droughts", "Niedrigwasser BY")),
                theme = shinytheme("lumen"),
-               navbarMenu("Catchments", icon = icon("globe"),
-                          tabPanel("Overview", fluid = TRUE, icon = icon("map"),
+               navbarMenu("Pegel", icon = icon("globe"),
+                          tabPanel("Überblick", fluid = TRUE, icon = icon("map"),
                                    tags$style(button_color_css),
                                    tags$style(HTML(".datepicker {z-index:99999 !important;}")),
                                        mainPanel(
-                                           titlePanel("Map Overview"),
+                                           titlePanel("Karten Überblick - Hydrologisches Bayern"),
                                            tmapOutput("three_catchment_map")
                                        )
                                    ),
@@ -63,45 +63,62 @@ Die Exposition des Pegels beträgt 290.6, was bedeutet, dass er einer nordwestli
 Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er einer südwestlichen Ausrichtung ausgesetzt ist. All diese Faktoren tragen dazu bei, dass der Pegel Isar Mittenwald ein wichtiges Instrument für die Messung von Wasserständen in der Region darstellt und einen wesentlichen Beitrag zur Überwachung der Gewässerqualität leistet.")
                                        ))
                           ),
-               navbarMenu("Descriptive Analysis", icon = icon("earth-europe"),
-                          tabPanel("Overall", fluid = TRUE, icon = icon("map"),
+               navbarMenu("Deskriptive Analyse", icon = icon("chart-simple"),
+                          tabPanel("Treibervariablen", fluid = TRUE, icon = icon("chart-simple"),
                                    tags$style(button_color_css),
                                    sidebarLayout(
                                        sidebarPanel(
-                                           h1("Inputs"),
-                                           selectInput("variable_min_max_plot", label = "Select variable of interest", choices = c("groundwaterdepth", "soilwater", "snowstorage", "airtmp", "precipitation", "glorad", "infiltration"), multiple = FALSE),
-                                           checkboxInput("facet_hydro_year", label = "Facet by hydrological year?", FALSE)
+                                           h1("Eingaben"),
+                                           selectInput("variable_min_max_plot", label = "Wähle Variable", choices = c("groundwaterdepth", "soilwater", "snowstorage", "airtmp", "precipitation", "glorad", "infiltration"), multiple = FALSE),
+                                           checkboxInput("facet_hydro_year", label = "Aufteilung nach hydrolog. Halbjahr?", FALSE)
                                        ),
                                        mainPanel(h1("Minima"), plotOutput("min_plot"), br(), h1("Maxima"), plotOutput("max_plot")
                                        )
                                        )
                                    ),
-                          tabPanel("Extreme Value Analysis", icon = icon("chart-simple"),
+                          tabPanel("Verteilung Treiber / Niedrigwasser", icon = icon("chart-simple"),
                                    sidebarLayout(
                                        sidebarPanel(
-                                           h1("Inputs"),
-                                           selectInput("extreme_value_catchment", label = "Select Catchment", 
+                                           h1("Eingaben"),
+                                           selectInput("extreme_value_catchment", label = "Wähle Pegel", 
                                                        choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"))
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
-                                                       tabPanel("Summer", h1("Summer"), dataTableOutput("qpr_hydro_summer")),
+                                                       tabPanel("Sommer", h1("Sommer"), dataTableOutput("qpr_hydro_summer")),
                                                        tabPanel("Winter", h1("Winter"), dataTableOutput("qpr_hydro_winter"))
                                            )
                                        )
                                    )
-                               )
+                               ),
+                          tabPanel("Korrelationsanalyse", icon = icon("chart-simple"),
+                                   sidebarLayout(
+                                     sidebarPanel(
+                                       h1("Eingaben"),
+                                       selectInput("corr_catchment", label = "Wähle Pegel", 
+                                                   choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald")),
+                                       selectInput("corr_corr", label = "Wähle Korrelationskoeffizienten",
+                                                   choices = c("Spearman", "Pearson"))
+                                     ),
+                                     mainPanel(
+                                       tabsetPanel(type = "tabs",
+                                                   tabPanel("Summer", h1("Summer"), plotOutput("corr_hydro_summer", height = 650)),
+                                                   tabPanel("Winter", h1("Winter"), plotOutput("corr_hydro_winter", height = 650))
+                                       )
+                                     )
+                                   )
+                          )
                           ),
                navbarMenu("Model", icon = icon("chart-simple"),
                           tabPanel("Analysis", icon = icon("chart-simple"),
                                    sidebarLayout(
                                        sidebarPanel(
-                                           h1("Inputs"),
+                                           h1("Eingaben"),
                                            selectInput("model_catchment", label = "Select Catchment", 
                                                        choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald")),
-                                           selectInput("model_selection", label = "Select model", choices = c("Full Model", "Trimmed Model", "Interactions")),
-                                           checkboxInput("model_summary", label = "Show model summary?", FALSE),
-                                           checkboxInput("effect_plots", label = "Show smooth term plots?", FALSE)
+                                           selectInput("model_selection", label = "Wähle Modell", choices = c("Full Model", "Trimmed Model", "Interactions")),
+                                           checkboxInput("model_summary", label = "Zeige Modell Zusammenfassung?", FALSE),
+                                           checkboxInput("effect_plots", label = "Zeige Effekt Plots?", FALSE)
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
@@ -140,17 +157,17 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                    )
                                    )
                           ),
-               navbarMenu("More", icon = icon("info"),
-                          tabPanel("About", icon = icon("circle-question"),
+               navbarMenu("Mehr", icon = icon("info"),
+                          tabPanel("Über das Projekt", icon = icon("circle-question"),
                                    fluidRow(
-                                       h1("About"),
+                                       h1("Über das Projekt"),
                                        p("Dieses Datenanalyse-Projekt beschäftigt sich mit der Vorhersage von Niedrigwasser für drei Pegel (Isar, Iller und Fränkische Saale) in Bayern. Das Projekt wurde als Weiterführung eines statistischen Consulting-Projekts von Theresa Meier und Nikita Paschan im Rahmen des statistischen Praktikums bearbeitet. Das Ziel des Projekts ist es, die Treiber von Niedrigwasser zu verstehen und Vorhersagen mit bestimmten Treibervariablen zu treffen. Im Consulting-Projekt wurde ganz Bayern mit deutlich mehreren Pegeln modelliert und vorgestellt. Die Daten stammen aus dem ClimEx-Projekt, einer Zusammenarbeit zwischen Bayern und Québec, das ein hydrologisches Simulationsmodell verwendet, um den Einfluss des Klimawandels auf meteorologische und hydrologische Extremereignisse in Bayern zu untersuchen. Es wurden 50 verschiedene Sätze von simulierten Daten (Mitglieder) mit unterschiedlichen Startbedingungen verwendet, um die natürliche Variabilität zu berücksichtigen. Das Projekt hat somit wichtige Implikationen für das Wasserressourcenmanagement in Bayern."),
                                        fluidRow(img(src = "Climex.png", height = 100, width = 250), img(src = "stablab.jpg", height = 150, width = 150))
                                        )       
                           ),
-                          tabPanel("Understanding the Models", icon = icon("lightbulb"),
+                          tabPanel("Modelle Leitfaden", icon = icon("lightbulb"),
                                    fluidRow(
-                                     h1("Understanding the Models"),
+                                     h1("Modelle LEitfaden"),
                                      p("Generalisierte additive Modelle (GAMs) sind eine Art von Regressionsanalyse, die verwendet wird, um Beziehungen zwischen einer Antwortvariable und einer oder mehreren Prädiktorvariablen zu modellieren. In der binomialen Regression ist die Antwortvariable binär (z.B. 0 oder 1), und die Prädiktorvariablen können entweder kontinuierlich oder kategorial sein.
 Die Interpretation von GAM-Koeffizienten in der binomialen Regression erfolgt in folgenden Schritten:"),
                                      h2("Lineare GAM-Koeffizienten:"),

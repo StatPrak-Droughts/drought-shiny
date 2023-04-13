@@ -1455,7 +1455,7 @@ shinyServer(function(input, output) {
         tm_shape(pegel_prop_sf[1,])+
         tm_markers(size = 0.3)
     )
-    # Model tables
+    # Model tables ----
     output$model_tab_summer <- renderUI({
       if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
@@ -1525,6 +1525,81 @@ shinyServer(function(input, output) {
         
         if (input$model_selection %in% "Interactions") {
           return(HTML(as.character(tab_model(gam_selected_interac_winter_10304, show.aic = TRUE))[4][1]))
+        }
+      }
+    })
+    # Corr Plot ----
+    ## Summer ----
+    output$corr_hydro_summer <- renderPlot({
+      if (input$corr_catchment %in% "Fränkische Saale Salz") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_summer_20203 <- cor(subset_hydro_summer_20203, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_summer_20203, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_summer_20203 <- cor(subset_hydro_summer_20203, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_summer_20203, method = "number", type = "lower", tl.col = "black")
+          
+        }
+      }
+      
+      if (input$corr_catchment %in% "Iller Kempten") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_summer_11502 <- cor(subset_hydro_summer_11502, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_summer_11502, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_summer_11502 <- cor(subset_hydro_summer_11502, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_summer_11502, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+
+      if (input$corr_catchment %in% "Isar Mittenwald") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_summer_10304 <- cor(subset_hydro_summer_10304, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_summer_10304, method = "number", type = "lower", tl.col = "black")
+        }
+        
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_summer_10304 <- cor(subset_hydro_summer_10304, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_summer_10304, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+    })
+    
+    ## Winter ----
+    output$corr_hydro_winter <- renderPlot({
+      if (input$corr_catchment %in% "Fränkische Saale Salz") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_winter_10304 <- cor(subset_hydro_winter_10304, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_winter_10304, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_winter_20203 <- cor(subset_hydro_winter_20203, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_winter_20203, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+      
+      if (input$corr_catchment %in% "Iller Kempten") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_winter_11502 <- cor(subset_hydro_winter_11502, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_winter_11502, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_winter_11502 <- cor(subset_hydro_winter_11502, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_winter_11502, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+      
+      if (input$corr_catchment %in% "Isar Mittenwald") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_winter_10304 <- cor(subset_hydro_winter_10304, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_winter_10304, method = "number", type = "lower", tl.col = "black")
+        }
+        
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_winter_20203 <- cor(subset_hydro_winter_20203, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_winter_20203, method = "number", type = "lower", tl.col = "black")
         }
       }
     })
