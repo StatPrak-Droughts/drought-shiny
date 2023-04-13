@@ -136,10 +136,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Minimum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -149,10 +149,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Minimum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_groundwaterdepth)
@@ -165,10 +165,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Minimum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -178,10 +178,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Minimum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_soilwater)
@@ -194,10 +194,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -207,10 +207,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
             return(min_plot_snowstorage)
@@ -223,10 +223,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -236,10 +236,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_airtmp)
@@ -253,10 +253,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -266,10 +266,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_precip)
@@ -283,10 +283,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Miniumum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -296,10 +296,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Miniumum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_glorad)
@@ -313,10 +313,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -326,10 +326,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_infiltration)
@@ -346,10 +346,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Maximum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -359,10 +359,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Maximum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_groundwaterdepth)
@@ -375,10 +375,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Maximum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -388,10 +388,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Maximum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_soilwater)
@@ -404,10 +404,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -417,10 +417,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_snowstorage)
@@ -433,10 +433,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -446,10 +446,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_airtmp)
@@ -463,10 +463,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -476,10 +476,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_precip)
@@ -493,10 +493,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -506,10 +506,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_glorad)
@@ -523,10 +523,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -536,10 +536,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Wasserleitfähigkeit \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_infiltration)
