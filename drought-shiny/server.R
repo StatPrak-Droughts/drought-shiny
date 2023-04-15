@@ -545,7 +545,7 @@ shinyServer(function(input, output) {
           return(summary(gam2_uni_selected_winter_20203))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_selected_interact_winter_20203))
+          return(summary(gam_uni_selected_interac_winter_20203))
         }
       }
       if (input$model_catchment %in% "Iller Kempten") {
@@ -559,7 +559,7 @@ shinyServer(function(input, output) {
           return(summary(gam2_uni_selected_winter_11502))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_interactions_winter_11502))
+          return(summary(gam_uni_selected_interac_winter_11502))
         }
       }
       if (input$model_catchment %in% "Isar Mittenwald") {
@@ -573,7 +573,7 @@ shinyServer(function(input, output) {
           return(summary(gam2_uni_selected_winter_10304))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_selected_interac_winter_10304))
+          return(summary(gam_uni_selected_interac_winter_10304))
         }
       }
     })
@@ -586,48 +586,48 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 1, ylim = input$model_range)
+          plot(gam_all_summer_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 1, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 1, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 1, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 1, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 1, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -637,47 +637,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 2, ylim = input$model_range)        }
+          plot(gam_all_summer_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 2, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 2, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 2, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 2, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 2, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -687,47 +687,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 3, ylim = input$model_range)        }
+          plot(gam_all_summer_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 3, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 3, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 3, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 3, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 3, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -737,47 +737,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 4, ylim = input$model_range)        }
+          plot(gam_all_summer_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 4, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 4, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 4, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 4, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 4, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -787,47 +787,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 5, ylim = input$model_range)        }
+          plot(gam_all_summer_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 5, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 5, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 5, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 5, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 5, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -837,47 +837,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 6, ylim = input$model_range)        }
+          plot(gam_all_summer_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 6, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 6, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 6, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 6, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 6, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -887,48 +887,48 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 7, ylim = input$model_range)
+          plot(gam_all_summer_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 7, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 7, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 7, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 7, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 7, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -938,48 +938,48 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 8, ylim = input$model_range)
+          plot(gam_all_summer_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 8, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 8, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 8, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 8, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 8, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -989,48 +989,48 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 9, ylim = input$model_range)
+          plot(gam_all_summer_20203, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 9, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 9, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 9, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 9, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 9, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -1040,48 +1040,48 @@ shinyServer(function(input, output) {
     ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_summer_20203, select = 10, ylim = input$model_range)
+          plot(gam_all_summer_20203, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 10, ylim = input$model_range)
+          plot(gam_all_summer_11502, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 10, ylim = input$model_range)
+          plot(gam_all_summer_10304, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }}
     ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_summer_20203, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_summer_20203, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_summer_11502, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_summer_11502, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_summer_10304, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_summer_10304, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_summer_20203, select = 10, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_20203, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_summer_11502, select = 10, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_11502, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_summer_10304, select = 10, ylim = input$model_range)
+          plot(gam2_uni_selected_summer_10304, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_summer_20203, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_20203, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_summer_11502, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_11502, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_summer_10304, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_interac_summer_10304, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       })
@@ -1097,48 +1097,48 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 1, ylim = input$model_range)
+          plot(gam_all_winter_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 1, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 1, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 1, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 1, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 1, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 1, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 1, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -1148,47 +1148,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 2, ylim = input$model_range)        }
+          plot(gam_all_winter_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 2, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 2, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 2, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 2, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 2, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 2, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 2, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -1198,47 +1198,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 3, ylim = input$model_range)        }
+          plot(gam_all_winter_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 3, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 3, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 3, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 3, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 3, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 3, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 3, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -1248,47 +1248,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 4, ylim = input$model_range)        }
+          plot(gam_all_winter_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 4, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 4, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 4, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 4, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 4, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 4, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 4, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -1298,47 +1298,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 5, ylim = input$model_range)        }
+          plot(gam_all_winter_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 5, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 5, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 5, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 5, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 5, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 5, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 5, ylim = input$model_range, ylab = "log. Odds")
         }
       }
     })
@@ -1348,47 +1348,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 6, ylim = input$model_range)        }
+          plot(gam_all_winter_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 6, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 6, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 6, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 6, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 6, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 6, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 6, ylim = input$model_range, ylab = "log. Odds")
         }
       }    })
     #### Effect Plot 7 ----
@@ -1397,47 +1397,47 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 7, ylim = input$model_range)        }
+          plot(gam_all_winter_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")        }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 7, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 7, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 7, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 7, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 7, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 7, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 7, ylim = input$model_range, ylab = "log. Odds")
         }
       }    })
     #### Effect Plot 8 ----
@@ -1446,48 +1446,48 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 8, ylim = input$model_range)
+          plot(gam_all_winter_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 8, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 8, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 8, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 8, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 8, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_interac_winter_20203, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_20203, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_interac_winter_11502, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_11502, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_interac_winter_10304, select = 8, ylim = input$model_range)
+          plot(gam_uni_selected_interac_winter_10304, select = 8, ylim = input$model_range, ylab = "log. Odds")
         }
       }    })
     #### Effect Plot 9 ----
@@ -1496,36 +1496,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 9, ylim = input$model_range)
+          plot(gam_all_winter_20203, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 9, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 9, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 9, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 9, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 9, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 9, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 9, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
@@ -1546,36 +1546,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_all_winter_20203, select = 10, ylim = input$model_range)
+          plot(gam_all_winter_20203, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 10, ylim = input$model_range)
+          plot(gam_all_winter_11502, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 10, ylim = input$model_range)
+          plot(gam_all_winter_10304, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Selected Model 1") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_uni_selected_winter_20203, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_winter_20203, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_uni_selected_winter_11502, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_winter_11502, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_uni_selected_winter_10304, select = 10, ylim = input$model_range)
+          plot(gam_uni_selected_winter_10304, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Trimmed Model 2 ----
       if (input$model_selection %in% "Selected Model 2") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_uni_selected_winter_20203, select = 10, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_20203, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam2_uni_selected_winter_11502, select = 10, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_11502, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam2_uni_selected_winter_10304, select = 10, ylim = input$model_range)
+          plot(gam2_uni_selected_winter_10304, select = 10, ylim = input$model_range, ylab = "log. Odds")
         }
       }
       ##### Interactions ----
