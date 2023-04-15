@@ -7,114 +7,9 @@ library(DT)
 library(mgcv)
 library(sjPlot)
 library(slickR)
+library(corrplot)
 # Data Read in ----
-# hydro_summer_20203 <- readRDS(file = "./data/hydro_summer_20203.RDS")
-# hydro_summer_11502 <- readRDS(file = "./data/hydro_summer_11502.RDS")
-# hydro_summer_10304 <- readRDS(file = "./data/hydro_summer_10304.RDS")
-# hydro_winter_20203 <- readRDS(file = "./data/hydro_winter_20203.RDS")
-# hydro_winter_11502 <- readRDS(file = "./data/hydro_winter_11502.RDS")
-# hydro_winter_10304 <- readRDS(file = "./data/hydro_winter_10304.RDS")
-# hydro_total <- readRDS(file = "./data/hydro_total.RDS")
-# pegel_prop <- readRDS(file = "./data/pegel_prop.RDS")
-# # Add rescaled soilwater
-# hydro_summer_20203$soilwater100 <- hydro_summer_20203$soilwater * 100
-# hydro_summer_11502$soilwater100 <- hydro_summer_11502$soilwater * 100
-# hydro_summer_10304$soilwater100 <- hydro_summer_10304$soilwater * 100
-# hydro_winter_20203$soilwater100 <- hydro_winter_20203$soilwater * 100
-# hydro_winter_11502$soilwater100 <- hydro_winter_11502$soilwater * 100
-# hydro_winter_10304$soilwater100 <- hydro_winter_10304$soilwater * 100
-# hydro_bavaria <- read_sf("./data/Geo-Daten_Uebersicht/shapefile/EZG_OHNE_Reservoir_UTM32.shp")
-# 
-# # Quelle Data https://hub.arcgis.com/datasets/esri-de-content::bundesl%C3%A4nder-2021-mit-einwohnerzahl/explore?location=51.947250%2C15.358806%2C5.85&showTable=true
-# admin_bavaria <- read_sf("./added_data/LAN_ew_21.shp") %>% filter(GEN %in% c("Bayern", "Bayern (Bodensee)"))
-# admin_bavaria <- st_as_sf(admin_bavaria, crs = 4326)
-# pegel_prop_sf <- st_as_sf(pegel_prop, coords = c("longitude", "latitude"), crs = 4326) # crs Code for WGS 84
-# 
-# pegel_prop_sf$ID <- as.factor(pegel_prop_sf$ID)
-# 
-# # https://geoportal.bafg.de/CSWView/od.xhtml
-# waterways <- read_sf("./added_data/germany-waterways-shape/waterways.shp")
-# 
-# waterways_three <- waterways %>%
-#     filter(name %in% c("Isar",
-#                        "Donau",
-#                        "Fränkische Saale",
-#                        "Main",
-#                        "Iller"))
-# 
-# # Add Pegel props
-# hydro_bavaria_20203 <- hydro_bavaria %>% filter(gridcode == 20203) %>%
-#     left_join(pegel_prop, by = c("gridcode" = "ID"))
-# hydro_bavaria_11502 <- hydro_bavaria %>% filter(gridcode == 11502)%>%
-#     left_join(pegel_prop, by = c("gridcode" = "ID"))
-# hydro_bavaria_10304 <- hydro_bavaria %>% filter(gridcode == 10304)%>%
-#     left_join(pegel_prop, by = c("gridcode" = "ID"))
-# hydro_bavaria_three <- hydro_bavaria %>% filter(gridcode %in% c(10304, 11502, 20203))%>%
-#     left_join(pegel_prop, by = c("gridcode" = "ID"))
-# # Descriptive Data
-# # Load tables
-# table_yearly_avg_min_groundwaterdepth <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_groundwaterdepth.RDS")
-# table_yearly_avg_max_groundwaterdepth <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_groundwaterdepth.RDS")
-# table_yearly_avg_min_soilwater <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_soilwater.RDS")
-# table_yearly_avg_max_soilwater <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_soilwater.RDS")
-# table_yearly_avg_min_snowstorage <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_snowstorage.RDS")
-# table_yearly_avg_max_snowstorage <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_snowstorage.RDS")
-# table_yearly_avg_min_airtmp <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_airtmp.RDS")
-# table_yearly_avg_max_airtmp <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_airtmp.RDS")
-# table_yearly_avg_max_precip <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_precip.RDS")
-# table_yearly_avg_min_precip <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_precip.RDS")
-# table_yearly_avg_max_glorad <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_glorad.RDS")
-# table_yearly_avg_min_glorad <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_glorad.RDS")
-# table_yearly_avg_max_relhum <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_relhum.RDS")
-# table_yearly_avg_min_relhum <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_relhum.RDS")
-# table_yearly_avg_max_infiltration <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_infiltration.RDS")
-# table_yearly_avg_min_infiltration <-
-#   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_infiltration.RDS")
-# # QPR Data
-# qpr_hydro_summer_10304 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_summer_10304.RDS")
-# qpr_hydro_summer_11502 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_summer_11502.RDS")
-# qpr_hydro_summer_20203 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_summer_20203.RDS")
-# 
-# qpr_hydro_winter_10304 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_10304.RDS")
-# qpr_hydro_winter_11502 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_11502.RDS")
-# qpr_hydro_winter_20203 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_20203.RDS")
-# # 11502 Models
-# load(file= "./added_data/models/11502/gam_all_summer_11502.Rdata")
-# load(file= "./added_data/models/11502/gam_all_winter_11502.Rdata")
-# load(file= "./added_data/models/11502/gam_trimmed_summer_11502.Rdata")
-# load(file= "./added_data/models/11502/gam_trimmed_winter_11502.Rdata")
-# load(file= "./added_data/models/11502/gam_interactions_summer_11502.Rdata")
-# load(file= "./added_data/models/11502/gam_interactions_winter_11502.Rdata")
-# # 10304 Models
-# load(file = "./added_data/models/10304/gam_all_summer_10304.Rdata")
-# load(file = "./added_data/models/10304/gam_all_winter_10304.Rdata")
-# load(file = "./added_data/models/10304/gam_selected_summer_10304.Rdata")
-# load(file = "./added_data/models/10304/gam_selected_winter_10304.Rdata")
-# load(file = "./added_data/models/10304/gam_selected_interac_summer_10304.Rdata")
-# load(file = "./added_data/models/10304/gam_selected_interac_winter_10304.Rdata")
-# # 20203 Models
-# load(file = "./added_data/models/20203/gam2_all_summer_20203.Rdata")
-# load(file = "./added_data/models/20203/gam2_all_winter_20203.Rdata")
-# load(file = "./added_data/models/20203/gam_selected_summer_20203.Rdata")
-# load(file = "./added_data/models/20203/gam_selected_winter_20203.Rdata")
-# load(file = "./added_data/models/20203/gam_selected_interact_summer_20203.Rdata")
-# load(file = "./added_data/models/20203/gam_selected_interact_winter_20203.Rdata")
-
+source("data_read.R")
 # Server ---- 
 shinyServer(function(input, output) {
     # Catchment Map ----
@@ -136,10 +31,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Minimum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -149,10 +44,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Minimum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_groundwaterdepth)
@@ -165,10 +60,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Minimum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -178,10 +73,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Minimum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_soilwater)
@@ -194,10 +89,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -207,10 +102,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
             return(min_plot_snowstorage)
@@ -223,10 +118,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -236,10 +131,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_airtmp)
@@ -253,10 +148,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -266,10 +161,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_precip)
@@ -283,10 +178,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Miniumum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -296,10 +191,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Miniumum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_glorad)
@@ -312,11 +207,11 @@ shinyServer(function(input, output) {
           min_plot_infiltration_facet <- ggplot(data = table_yearly_avg_min_infiltration, mapping = aes(x = YY, y = avg_min_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -325,11 +220,11 @@ shinyServer(function(input, output) {
           min_plot_infiltration <- ggplot(data = table_yearly_avg_min_infiltration, mapping = aes(x = YY, y = avg_min_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Minimum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Minimum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_infiltration)
@@ -346,10 +241,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Maximum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -359,10 +254,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum des täglichem Grundwasserstandes \n(in m unter Oberfläche)",
+                 y = "Jährliches durchschnittliches Maximum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_groundwaterdepth)
@@ -375,10 +270,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Maximum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -388,10 +283,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
+                 y = "Jährliches durchschnittliches Maximum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_soilwater)
@@ -404,10 +299,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -417,10 +312,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \n(in mm)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_snowstorage)
@@ -433,10 +328,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -446,10 +341,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \n(in °C)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_airtmp)
@@ -463,10 +358,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -476,10 +371,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \n(in mm/24h)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_precip)
@@ -493,10 +388,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -506,10 +401,10 @@ shinyServer(function(input, output) {
             geom_line() +
             geom_point() +
             labs(title = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_glorad)
@@ -522,11 +417,11 @@ shinyServer(function(input, output) {
           max_plot_infiltration_facet <- ggplot(data = table_yearly_avg_max_infiltration, mapping = aes(x = YY, y = avg_max_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2") +
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
@@ -535,11 +430,11 @@ shinyServer(function(input, output) {
           max_plot_infiltration <- ggplot(data = table_yearly_avg_max_infiltration, mapping = aes(x = YY, y = avg_max_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \nje Jahreszeit im Zeitverlauf (aller Member)",
-                 y = "Jährliches durchschnittliches Maximum an täglicher Wasserleitfähigkeit \n(in mm/24h)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
-            theme(text = element_text(size = 20),
+            theme(text = element_text(size = 15),
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_infiltration)
@@ -674,36 +569,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_summer_20203, select = 1, ylim = c(-5, 5))
+          plot(gam2_all_summer_20203, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 1, ylim = c(-200, 50))
+          plot(gam_all_summer_11502, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 1, ylim = c(-300, 200))
+          plot(gam_all_summer_10304, select = 1, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_summer_20203, select = 1, ylim = c(-5, 5))
+          plot(gam_selected_summer_20203, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 1, ylim = c(-200, 50))
+          plot(gam_trimmed_summer_11502, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 1, ylim = c(-300, 200))
+          plot(gam_selected_summer_10304, select = 1, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 1, ylim = c(-5, 5))
+          plot(gam_selected_interact_summer_20203, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 1, ylim = c(-200, 50))
+          plot(gam_interactions_summer_11502, select = 1, ylim = c(-20, 20))
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 1, ylim = c(-300, 200))
+          plot(gam_selected_interac_summer_10304, select = 1, ylim = input$model_range)
         }
       }
     })
@@ -713,36 +608,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_summer_20203, select = 2, ylim = c(-5, 5))
+          plot(gam2_all_summer_20203, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 2, ylim = c(-20, 15))
+          plot(gam_all_summer_11502, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 2, ylim = c(-20, 15))
+          plot(gam_all_summer_10304, select = 2, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 2, ylim = c(-5, 10))
+          plot(gam_selected_interact_summer_20203, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 2, ylim = c(-20, 15))
+          plot(gam_trimmed_summer_11502, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 2, ylim = c(-20, 15))
+          plot(gam_selected_interac_summer_10304, select = 2, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 2, ylim = c(-5, 10))
+          plot(gam_selected_interact_summer_20203, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 2, ylim = c(-20, 15))
+          plot(gam_interactions_summer_11502, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 2, ylim = c(-20, 15))
+          plot(gam_selected_interac_summer_10304, select = 2, ylim = input$model_range)
         }
       }
     })
@@ -752,36 +647,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_summer_20203, select = 3, ylim = c(-10, 10))
+          plot(gam2_all_summer_20203, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 3, ylim = c(-15, 15))
+          plot(gam_all_summer_11502, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 3, ylim = c(-15, 15))
+          plot(gam_all_summer_10304, select = 3, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_summer_20203, select = 3, ylim = c(-5, 10))
+          plot(gam_selected_summer_20203, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 3, ylim = c(-15, 15))
+          plot(gam_trimmed_summer_11502, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 3, ylim = c(-15, 15))
+          plot(gam_selected_summer_10304, select = 3, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 3, ylim = c(-10, 10))
+          plot(gam_selected_interact_summer_20203, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 3, ylim = c(-15, 15))
+          plot(gam_interactions_summer_11502, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 3, ylim = c(-15, 15))
+          plot(gam_selected_interac_summer_10304, select = 3, ylim = input$model_range)
         }
       }
     })
@@ -791,36 +686,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_summer_20203, select = 4, ylim = c(-150, 40))
+          plot(gam2_all_summer_20203, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 4, ylim = c(-10, 10))
+          plot(gam_all_summer_11502, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 4, ylim = c(-10, 10))
+          plot(gam_all_summer_10304, select = 4, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_summer_20203, select = 4, ylim = c(-150, 40))
+          plot(gam_selected_summer_20203, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 4, ylim = c(-10, 15))
+          plot(gam_trimmed_summer_11502, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 4, ylim = c(-10, 15))
+          plot(gam_selected_summer_10304, select = 4, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 4, ylim = c(-150, 40))
+          plot(gam_selected_interact_summer_20203, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 4, ylim = c(-10, 15))
+          plot(gam_interactions_summer_11502, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 4, ylim = c(-10, 15))
+          plot(gam_selected_interac_summer_10304, select = 4, ylim = input$model_range)
         }
       }
     })
@@ -830,36 +725,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_summer_20203, select = 5, ylim = c(-5, 10))
+          plot(gam2_all_summer_20203, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 5, ylim = c(-20, 20))
+          plot(gam_all_summer_11502, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 5, ylim = c(-20, 20))
+          plot(gam_all_summer_10304, select = 5, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_summer_20203, select = 5, ylim = c(-50000, 100))
+          plot(gam_selected_summer_20203, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 5, ylim = c(-50, 20))
+          plot(gam_trimmed_summer_11502, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 5, ylim = c(-30, 20))
+          plot(gam_selected_summer_10304, select = 5, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 5, ylim = c(-50000, 100))
+          plot(gam_selected_interact_summer_20203, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 5, ylim = c(-30, 20))
+          plot(gam_interactions_summer_11502, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 5, ylim = c(-30, 20))
+          plot(gam_selected_interac_summer_10304, select = 5, ylim = input$model_range)
         }
       }
     })
@@ -869,21 +764,21 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_summer_20203, select = 6, ylim = c(-200, 100))
+          plot(gam2_all_summer_20203, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 6, ylim = c(-50, 30))
+          plot(gam_all_summer_11502, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 6, ylim = c(-100, 100))
+          plot(gam_all_summer_10304, select = 6, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_summer_20203, select = 6, ylim = c(-5, 10))        
+          plot(gam_selected_summer_20203, select = 6, ylim = input$model_range)        
           }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 6, ylim = c(-40, 20))        
+          plot(gam_trimmed_summer_11502, select = 6, ylim = input$model_range)        
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
      
@@ -892,13 +787,13 @@ shinyServer(function(input, output) {
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 6, ylim = c(-10, 10))
+          plot(gam_selected_interact_summer_20203, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 6, ylim = c(-20, 10))
+          plot(gam_interactions_summer_11502, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 6, ylim = c(-40, 40))
+          plot(gam_selected_interac_summer_10304, select = 6, ylim = input$model_range)
         }
       }
     })
@@ -910,17 +805,17 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 7, ylim = c(-50, 15))
+          plot(gam_all_summer_11502, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 7, ylim = c(-50, 15))
+          plot(gam_all_summer_10304, select = 7, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 7, ylim = c(-50, 15))
+          plot(gam_trimmed_summer_11502, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
         }
@@ -928,13 +823,13 @@ shinyServer(function(input, output) {
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 7, ylim = c(-50, 15))
+          plot(gam_selected_interact_summer_20203, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 7, ylim = c(-120, 15))
+          plot(gam_interactions_summer_11502, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_summer_10304, select = 7, ylim = c(-30, 15))
+          plot(gam_selected_interac_summer_10304, select = 7, ylim = input$model_range)
         }
       }
     })
@@ -947,17 +842,17 @@ shinyServer(function(input, output) {
 
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 8, ylim = c(-50, 15))
+          plot(gam_all_summer_11502, select = 8, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 8, ylim = c(-50, 15))
+          plot(gam_all_summer_10304, select = 8, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_summer_11502, select = 8, ylim = c(-30, 15))
+          plot(gam_trimmed_summer_11502, select = 8, ylim = input$model_range)
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
@@ -966,11 +861,11 @@ shinyServer(function(input, output) {
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_summer_20203, select = 8, ylim = c(-10, 20))
+          plot(gam_selected_interact_summer_20203, select = 8, ylim = input$model_range)
           
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 8, ylim = c(-20, 20))
+          plot(gam_interactions_summer_11502, select = 8, ylim = input$model_range)
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
@@ -985,10 +880,10 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 9, ylim = c(-15, 15))
+          plot(gam_all_summer_11502, select = 9, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 9, ylim = c(-15, 15))
+          plot(gam_all_summer_10304, select = 9, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -1005,7 +900,7 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 9, ylim = c(-90, 20))
+          plot(gam_interactions_summer_11502, select = 9, input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
           
@@ -1020,10 +915,10 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_summer_11502, select = 10, ylim = c(-150, 100))
+          plot(gam_all_summer_11502, select = 10, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_summer_10304, select = 10, ylim = c(-150, 100))
+          plot(gam_all_summer_10304, select = 10, ylim = input$model_range)
         }}
     ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -1047,6 +942,10 @@ shinyServer(function(input, output) {
       }
       })
     ## Winter ----
+    output$slider_ui <- renderUI({
+      req(input$effect_plots)
+      sliderInput("model_range", label = "Wähle Skalierung für Effektplots y-Achse", min = -50, max = 50,  value = c(-7,7))
+    })
     # Selected Saale 6 Isar 6 Iller
     #### Effect Plot 1 ----
     output$model_effect_winter_1 <- renderPlot({
@@ -1054,36 +953,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_winter_20203, select = 1, ylim = c(-10, 10))
+          plot(gam2_all_winter_20203, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 1, ylim = c(-50, 20))
+          plot(gam_all_winter_11502, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 1, ylim = c(-40, 40))
+          plot(gam_all_winter_10304, select = 1, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_winter_20203, select = 1, ylim = c(-5, 15))
+          plot(gam_selected_winter_20203, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 1, ylim = c(-30, 10))
+          plot(gam_trimmed_winter_11502, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 1, ylim = c(-300, 100))
+          plot(gam_selected_summer_10304, select = 1, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 1, ylim = c(-150, 70))
+          plot(gam_selected_interact_winter_20203, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 1, ylim = c(-50, 20))
+          plot(gam_interactions_winter_11502, select = 1, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 1, ylim = c(-50, 50))
+          plot(gam_selected_interac_winter_10304, select = 1, ylim = input$model_range)
         }
       }
     })
@@ -1093,36 +992,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_winter_20203, select = 2, ylim = c(-30, 15))
+          plot(gam2_all_winter_20203, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 2, ylim = c(-50, 50))
+          plot(gam_all_winter_11502, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 2, ylim = c(-10, 20))
+          plot(gam_all_winter_10304, select = 2, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_winter_20203, select = 2, ylim = c(-20, 20))
+          plot(gam_selected_winter_20203, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 2, ylim = c(-20, 20))
+          plot(gam_trimmed_winter_11502, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_summer_10304, select = 2, ylim = c(-10, 10))
+          plot(gam_selected_summer_10304, select = 2, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 2, ylim = c(-50, 30))
+          plot(gam_selected_interact_winter_20203, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 2, ylim = c(-20, 10))
+          plot(gam_interactions_winter_11502, select = 2, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 2, ylim = c(-500, 1000))
+          plot(gam_selected_interac_winter_10304, select = 2, ylim = input$model_range)
         }
       }
     })
@@ -1132,36 +1031,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_winter_20203, select = 3, ylim = c(-10, 30))
+          plot(gam2_all_winter_20203, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 3, ylim = c(-500, 100))
+          plot(gam_all_winter_11502, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 3, ylim = c(-15, 15))
+          plot(gam_all_winter_10304, select = 3, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_winter_20203, select = 3, ylim = c(-10, 30))
+          plot(gam_selected_winter_20203, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 3, ylim = c(-500, 100))
+          plot(gam_trimmed_winter_11502, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_winter_10304, select = 3, ylim = c(-20, 10))
+          plot(gam_selected_winter_10304, select = 3, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 3, ylim = c(-50, 80))
+          plot(gam_selected_interact_winter_20203, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 3, ylim = c(-500, 100))
+          plot(gam_interactions_winter_11502, select = 3, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 3, ylim = c(-50, 50))
+          plot(gam_selected_interac_winter_10304, select = 3, ylim = input$model_range)
         }
       }
     })
@@ -1171,36 +1070,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_winter_20203, select = 4, ylim = c(-25, 30))
+          plot(gam2_all_winter_20203, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 4, ylim = c(-50, 10))
+          plot(gam_all_winter_11502, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 4, ylim = c(-20, 20))
+          plot(gam_all_winter_10304, select = 4, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_winter_20203, select = 4, ylim = c(-30, 30))
+          plot(gam_selected_winter_20203, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 4, ylim = c(-50, 15))
+          plot(gam_trimmed_winter_11502, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_winter_10304, select = 4, ylim = c(-10, 10))
+          plot(gam_selected_winter_10304, select = 4, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 4, ylim = c(-1700, 1000))
+          plot(gam_selected_interact_winter_20203, select = 4, input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 4, ylim = c(-50, 15))
+          plot(gam_interactions_winter_11502, select = 4, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 4, ylim = c(-3200, 1000))
+          plot(gam_selected_interac_winter_10304, select = 4, ylim = input$model_range)
         }
       }
     })
@@ -1210,36 +1109,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_winter_20203, select = 5, ylim = c(-3500, 2500))
+          plot(gam2_all_winter_20203, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 5, ylim = c(-70, 20))
+          plot(gam_all_winter_11502, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 5, ylim = c(-10, 10))
+          plot(gam_all_winter_10304, select = 5, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_winter_20203, select = 5, ylim = c(-4000, 2500))
+          plot(gam_selected_winter_20203, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 5, ylim = c(-70, 20))
+          plot(gam_trimmed_winter_11502, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_winter_10304, select = 5, ylim = c(-50, 20))
+          plot(gam_selected_winter_10304, select = 5, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 5, ylim = c(-5, 5))
+          plot(gam_selected_interact_winter_20203, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 5, ylim = c(-70, 20))
+          plot(gam_interactions_winter_11502, select = 5, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 5, ylim = c(-3000, 1000))
+          plot(gam_selected_interac_winter_10304, select = 5, ylim = input$model_range)
         }
       }
     })
@@ -1249,36 +1148,36 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_winter_20203, select = 6, ylim = c(-30, 10))
+          plot(gam2_all_winter_20203, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 6, ylim = c(-50, 30))
+          plot(gam_all_winter_11502, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 6, ylim = c(-100, 10))
+          plot(gam_all_winter_10304, select = 6, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_winter_20203, select = 6, ylim = c(-20, 5))
+          plot(gam_selected_winter_20203, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 6, ylim = c(-500, 30))
+          plot(gam_trimmed_winter_11502, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_winter_10304, select = 6, ylim = c(-500, 150))
+          plot(gam_selected_winter_10304, select = 6, ylim = input$model_range)
         }
       }
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 6, ylim = c(-10, 10))
+          plot(gam_selected_interact_winter_20203, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_summer_11502, select = 6, ylim = c(-10, 10))
+          plot(gam_interactions_summer_11502, select = 6, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 6, ylim = c(-200, 300))
+          plot(gam_selected_interac_winter_10304, select = 6, ylim = input$model_range)
         }
       }
     })
@@ -1288,20 +1187,20 @@ shinyServer(function(input, output) {
       ###### Full Model ----
       if (input$model_selection %in% "Full Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam2_all_winter_20203, select = 7, ylim = c(-5, 5))
+          plot(gam2_all_winter_20203, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 7, ylim = c(-50, 15))
+          plot(gam_all_winter_11502, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 7, ylim = c(-20, 20))
+          plot(gam_all_winter_10304, select = 7, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 7, ylim = c(-50, 15))
+          plot(gam_trimmed_winter_11502, select = 7, ylim = input$model_range)
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
@@ -1310,13 +1209,13 @@ shinyServer(function(input, output) {
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 7, ylim = c(-700, 100))
+          plot(gam_selected_interact_winter_20203, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 7, ylim = c(-60, 15))
+          plot(gam_interactions_winter_11502, select = 7, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 7, ylim = c(-500, 250))
+          plot(gam_selected_interac_winter_10304, select = 7, ylim = input$model_range)
         }
       }
     })
@@ -1328,17 +1227,17 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 8, ylim = c(-60, 15))
+          plot(gam_all_winter_11502, select = 8, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 8, ylim = c(-300, 100))
+          plot(gam_all_winter_10304, select = 8, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_trimmed_winter_11502, select = 8, ylim = c(-60, 15))
+          plot(gam_trimmed_winter_11502, select = 8, ylim = input$model_range)
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
@@ -1347,13 +1246,13 @@ shinyServer(function(input, output) {
       ##### Interactions ----
       if (input$model_selection %in% "Interactions") {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
-          plot(gam_selected_interact_winter_20203, select = 8, ylim = c(-50, 100))
+          plot(gam_selected_interact_winter_20203, select = 8, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 8, ylim = c(-60, 15))
+          plot(gam_interactions_winter_11502, select = 8, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_selected_interac_winter_10304, select = 8, ylim = c(-150, 80))
+          plot(gam_selected_interac_winter_10304, select = 8, ylim = input$model_range)
         }
       }
     })
@@ -1365,10 +1264,10 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 9, ylim = c(-15, 15))
+          plot(gam_all_winter_11502, select = 9, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 9, ylim = c(-15, 15))
+          plot(gam_all_winter_10304, select = 9, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -1385,7 +1284,7 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 9, ylim = c(-60, 15))
+          plot(gam_interactions_winter_11502, select = 9, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
         }
@@ -1399,10 +1298,10 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_all_winter_11502, select = 10, ylim = c(-150, 100))
+          plot(gam_all_winter_11502, select = 10, ylim = input$model_range)
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
-          plot(gam_all_winter_10304, select = 10, ylim = c(-400, 100))
+          plot(gam_all_winter_10304, select = 10, ylim = input$model_range)
         }}
       ##### Trimmed Model ----
       if (input$model_selection %in% "Trimmed Model") {
@@ -1419,7 +1318,7 @@ shinyServer(function(input, output) {
         if(input$model_catchment %in% "Fränkische Saale Salz"){
         }
         if (input$model_catchment %in% "Iller Kempten") {
-          plot(gam_interactions_winter_11502, select = 10, ylim = c(-10, 10))
+          plot(gam_interactions_winter_11502, select = 10, ylim = input$model_range)
           
         }
         if (input$model_catchment %in% "Isar Mittenwald") {
@@ -1455,7 +1354,7 @@ shinyServer(function(input, output) {
         tm_shape(pegel_prop_sf[1,])+
         tm_markers(size = 0.3)
     )
-    # Model tables
+    # Model tables ----
     output$model_tab_summer <- renderUI({
       if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
@@ -1525,6 +1424,81 @@ shinyServer(function(input, output) {
         
         if (input$model_selection %in% "Interactions") {
           return(HTML(as.character(tab_model(gam_selected_interac_winter_10304, show.aic = TRUE))[4][1]))
+        }
+      }
+    })
+    # Corr Plot ----
+    ## Summer ----
+    output$corr_hydro_summer <- renderPlot({
+      if (input$corr_catchment %in% "Fränkische Saale Salz") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_summer_20203 <- cor(subset_hydro_summer_20203, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_summer_20203, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_summer_20203 <- cor(subset_hydro_summer_20203, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_summer_20203, method = "number", type = "lower", tl.col = "black")
+          
+        }
+      }
+      
+      if (input$corr_catchment %in% "Iller Kempten") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_summer_11502 <- cor(subset_hydro_summer_11502, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_summer_11502, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_summer_11502 <- cor(subset_hydro_summer_11502, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_summer_11502, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+
+      if (input$corr_catchment %in% "Isar Mittenwald") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_summer_10304 <- cor(subset_hydro_summer_10304, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_summer_10304, method = "number", type = "lower", tl.col = "black")
+        }
+        
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_summer_10304 <- cor(subset_hydro_summer_10304, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_summer_10304, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+    })
+    
+    ## Winter ----
+    output$corr_hydro_winter <- renderPlot({
+      if (input$corr_catchment %in% "Fränkische Saale Salz") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_winter_10304 <- cor(subset_hydro_winter_10304, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_winter_10304, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_winter_20203 <- cor(subset_hydro_winter_20203, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_winter_20203, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+      
+      if (input$corr_catchment %in% "Iller Kempten") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_winter_11502 <- cor(subset_hydro_winter_11502, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_winter_11502, method = "number", type = "lower", tl.col = "black")
+        }
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_winter_11502 <- cor(subset_hydro_winter_11502, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_winter_11502, method = "number", type = "lower", tl.col = "black")
+        }
+      }
+      
+      if (input$corr_catchment %in% "Isar Mittenwald") {
+        if (input$corr_corr %in% "Spearman") {
+          correlationm_spearman_winter_10304 <- cor(subset_hydro_winter_10304, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_winter_10304, method = "number", type = "lower", tl.col = "black")
+        }
+        
+        if (input$corr_corr %in% "Pearson") {
+          correlationm_pearson_winter_20203 <- cor(subset_hydro_winter_20203, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_winter_20203, method = "number", type = "lower", tl.col = "black")
         }
       }
     })
