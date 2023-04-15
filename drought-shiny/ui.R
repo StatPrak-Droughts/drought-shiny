@@ -11,6 +11,7 @@ library(plotly)
 library(mgcv)
 library(tidyverse)
 library(corrplot)
+library(verification)
 source("data_read.R")
 button_color_css <- "
 #DivCompClear, #FinderClear, #EnterTimes{
@@ -112,7 +113,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                           )
                           ),
                navbarMenu("Model", icon = icon("chart-simple"),
-                          tabPanel("Analysis", icon = icon("chart-simple"),
+                          tabPanel("Overview / Effects", icon = icon("chart-simple"),
                                    sidebarLayout(
                                        sidebarPanel(
                                            h1("Eingaben"),
@@ -158,7 +159,30 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                            )
                                        )
                                    )
+                                   ),
+                          tabPanel("ROC Analysis", icon = icon("chart-simple"),
+                                   sidebarLayout(
+                                     sidebarPanel(
+                                       h1("Eingaben"),
+                                       selectInput("roc_catchment", label = "Select Catchment", 
+                                                   choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"))
+                                     ),
+                                     mainPanel(
+                                       tabsetPanel(type = "tabs",
+                                                   tabPanel("Summer",
+                                                            h1("Summer"),
+                                                            p("For the ROC analysis we only used the model with interactions and best fit for each catchment"),
+                                                            plotOutput("roc_summer")
+                                                   ),
+                                                   tabPanel("Winter", 
+                                                            h1("Winter"),
+                                                            p("For the ROC analysis we only used the model with interactions and best fit for each catchment"),
+                                                            plotOutput("roc_winter")
+                                                   )
+                                       )
+                                     )
                                    )
+                          )
                           ),
                navbarMenu("Mehr", icon = icon("info"),
                           tabPanel("Über das Projekt", icon = icon("circle-question"),

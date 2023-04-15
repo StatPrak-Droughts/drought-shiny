@@ -8,6 +8,7 @@ library(mgcv)
 library(sjPlot)
 library(slickR)
 library(corrplot)
+library(verification)
 # Data Read in ----
 source("data_read.R")
 # Server ---- 
@@ -1764,6 +1765,40 @@ shinyServer(function(input, output) {
           correlationm_pearson_winter_20203 <- cor(subset_hydro_winter_20203, method = "pearson", use = "complete.obs")
           corrplot(correlationm_pearson_winter_20203, method = "number", type = "lower", tl.col = "black")
         }
+      }
+    })
+    
+    # ROC Plots ----
+    ## Summmer ----
+    output$roc_summer <- renderPlot({
+      if(input$roc_catchment %in% "Fränkische Saale Salz"){
+        hydro_summer_20203_pred <- predict(gam_uni_selected_interac_summer_20203, hydro_summer_20203_test, type = "response")
+        roc.plot(hydro_summer_20203_test$lowlevel, hydro_summer_20203_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+      }
+      if (input$roc_catchment %in% "Iller Kempten") {
+        hydro_summer_11502_pred <- predict(gam_uni_selected_interac_summer_11502, hydro_summer_11502_test, type = "response")
+        roc.plot(hydro_summer_11502_test$lowlevel, hydro_summer_11502_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+      }
+      if (input$roc_catchment %in% "Isar Mittenwald") {
+        hydro_summer_10304_pred <- predict(gam_uni_selected_interac_summer_10304, hydro_summer_10304_test, type = "response")
+        roc.plot(hydro_summer_10304_test$lowlevel, hydro_summer_10304_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+      }
+    })
+    
+    ## Winter ----
+    output$roc_winter <- renderPlot({
+      if(input$roc_catchment %in% "Fränkische Saale Salz"){
+        hydro_winter_20203_pred <- predict(gam_uni_selected_interac_winter_20203, hydro_winter_20203_test, type = "response")
+        roc.plot(hydro_winter_20203_test$lowlevel, hydro_winter_20203_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+      }
+      if (input$roc_catchment %in% "Iller Kempten") {
+        hydro_winter_11502_pred <- predict(gam_uni_selected_interac_winter_11502, hydro_winter_11502_test, type = "response")
+        roc.plot(hydro_winter_11502_test$lowlevel, hydro_winter_11502_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+        
+      }
+      if (input$roc_catchment %in% "Isar Mittenwald") {
+        hydro_winter_10304_pred <- predict(gam_uni_selected_interac_winter_10304, hydro_winter_10304_test, type = "response")
+        roc.plot(hydro_winter_10304_test$lowlevel, hydro_winter_10304_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
       }
     })
 })
