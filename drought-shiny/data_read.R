@@ -128,3 +128,21 @@ subset_hydro_summer_20203 <- readRDS("./data/corrplots/subset_hydro_summer_20203
 subset_hydro_winter_10304 <- readRDS("./data/corrplots/subset_hydro_winter_10304.RDS")
 subset_hydro_winter_11502 <- readRDS("./data/corrplots/subset_hydro_winter_11502.RDS")
 subset_hydro_winter_20203 <- readRDS("./data/corrplots/subset_hydro_winter_20203.RDS")
+# Setup test set
+hydro_winter_11502_test <- hydro_winter_11502 %>% filter(member != "kbe")
+hydro_winter_11502_test$lowlevel <- as.logical(hydro_winter_11502_test$lowlevel)
+
+hydro_summer_11502_test <- hydro_summer_11502 %>% filter(member != "kbe")
+hydro_summer_11502_test$lowlevel <- as.logical(hydro_summer_11502_test$lowlevel)
+
+hydro_winter_10304_test <- hydro_winter_10304 %>% filter(member != "kbe")
+hydro_winter_10304_test$lowlevel <- as.logical(hydro_winter_10304_test$lowlevel)
+
+hydro_summer_10304_test <- hydro_summer_10304 %>% filter(member != "kbe")
+hydro_summer_10304_test$lowlevel <- as.logical(hydro_summer_10304_test$lowlevel)
+
+hydro_winter_20203_test <- hydro_winter_20203 %>% filter(member != "kbe")
+hydro_winter_20203_test$lowlevel <- as.logical(hydro_winter_20203_test$lowlevel)
+
+hydro_summer_20203_test <- hydro_summer_20203 %>% filter(member != "kbe")
+hydro_summer_20203_test$lowlevel <- as.logical(hydro_summer_20203_test$lowlevel)
