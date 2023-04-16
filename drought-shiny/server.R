@@ -491,44 +491,44 @@ shinyServer(function(input, output) {
       
       if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_summer_20203))
+          return(summary(le_gam_all_summer_20203))
         }
         if (input$model_selection %in% "Selected Model 1") {
-          return(summary(gam_uni_selected_summer_20203))
+          return(summary(le_gam_uni_selected_summer_20203))
         }
         if (input$model_selection %in% "Selected Model 2") {
-          return(summary(gam2_uni_selected_summer_20203))
+          return(summary(le_gam2_uni_selected_summer_20203))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_uni_selected_interac_summer_20203))
+          return(summary(le_gam_uni_selected_interac_summer_20203))
         }
       }
       if (input$model_catchment %in% "Iller Kempten") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_summer_11502))
+          return(summary(le_gam_all_summer_11502))
         }
         if (input$model_selection %in% "Selected Model 1") {
-          return(summary(gam_uni_selected_summer_11502))
+          return(summary(le_gam_uni_selected_summer_11502))
         }
         if (input$model_selection %in% "Selected Model 2") {
-          return(summary(gam2_uni_selected_summer_11502))
+          return(summary(le_gam2_uni_selected_summer_11502))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_uni_selected_interac_summer_11502))
+          return(summary(le_gam_uni_selected_interac_summer_11502))
         }
       }
       if (input$model_catchment %in% "Isar Mittenwald") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_summer_10304))
+          return(summary(le_gam_all_summer_10304))
         }
         if (input$model_selection %in% "Selected Model 1") {
-          return(summary(gam_uni_selected_summer_10304))
+          return(summary(le_gam_uni_selected_summer_10304))
         }
         if (input$model_selection %in% "Selected Model 2") {
-          return(summary(gam2_uni_selected_summer_10304))
+          return(summary(le_gam2_uni_selected_summer_10304))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_uni_selected_interac_summer_10304))
+          return(summary(le_gam_uni_selected_interac_summer_10304))
         }
       }
     })
@@ -536,44 +536,44 @@ shinyServer(function(input, output) {
       req(input$model_summary)
       if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_winter_20203))
+          return(summary(le_gam_all_winter_20203))
         }
         if (input$model_selection %in% "Selected Model 1") {
-          return(summary(gam_uni_selected_winter_20203))
+          return(summary(le_gam_uni_selected_winter_20203))
         }
         if (input$model_selection %in% "Selected Model 2") {
-          return(summary(gam2_uni_selected_winter_20203))
+          return(summary(le_gam2_uni_selected_winter_20203))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_uni_selected_interac_winter_20203))
+          return(summary(le_gam_uni_selected_interac_winter_20203))
         }
       }
       if (input$model_catchment %in% "Iller Kempten") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_winter_11502))
+          return(summary(le_gam_all_winter_11502))
         }
         if (input$model_selection %in% "Selected Model 1") {
-          return(summary(gam_uni_selected_winter_11502))
+          return(summary(le_gam_uni_selected_winter_11502))
         }
         if (input$model_selection %in% "Selected Model 2") {
-          return(summary(gam2_uni_selected_winter_11502))
+          return(summary(le_gam2_uni_selected_winter_11502))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_uni_selected_interac_winter_11502))
+          return(summary(le_gam_uni_selected_interac_winter_11502))
         }
       }
       if (input$model_catchment %in% "Isar Mittenwald") {
         if (input$model_selection %in% "Full Model") {
-          return(summary(gam_all_winter_10304))
+          return(summary(le_gam_all_winter_10304))
         }
         if (input$model_selection %in% "Selected Model 1") {
-          return(summary(gam_uni_selected_winter_10304))
+          return(summary(le_gam_uni_selected_winter_10304))
         }
         if (input$model_selection %in% "Selected Model 2") {
-          return(summary(gam2_uni_selected_winter_10304))
+          return(summary(le_gam2_uni_selected_winter_10304))
         }
         if (input$model_selection %in% "Interactions") {
-          return(summary(gam_uni_selected_interac_winter_10304))
+          return(summary(le_gam_uni_selected_interac_winter_10304))
         }
       }
     })
@@ -1623,72 +1623,88 @@ shinyServer(function(input, output) {
     output$model_tab_summer <- renderUI({
       if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
-          return(HTML(as.character(tab_model(gam2_all_summer_20203, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_all_summer_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        if (input$model_selection %in% "Trimmed Model") {
-          return(HTML(as.character(tab_model(gam_selected_summer_20203, show.aic = TRUE))[4][1]))
+        if (input$model_selection %in% "Selected Model 1") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_summer_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
+        }
+        if (input$model_selection %in% "Selected Model 2") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam2_uni_selected_summer_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
         if (input$model_selection %in% "Interactions") {
-          return(HTML(as.character(tab_model(gam_selected_interact_summer_20203, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_interac_summer_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
       }
       if (input$model_catchment %in% "Iller Kempten") {
         if (input$model_selection %in% "Full Model") {
-          return(HTML(as.character(tab_model(gam_all_summer_11502, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_all_summer_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        if (input$model_selection %in% "Trimmed Model") {
-          return(HTML(as.character(tab_model(gam_trimmed_summer_11502, show.aic = TRUE))[4][1]))
+        if (input$model_selection %in% "Selected Model 1") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_summer_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
+        }
+        if (input$model_selection %in% "Selected Model 2") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam2_uni_selected_summer_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
         if (input$model_selection %in% "Interactions") {
-          return(HTML(as.character(tab_model(gam_interactions_summer_11502, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_interac_summer_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
       }
       if (input$model_catchment %in% "Isar Mittenwald") {
         if (input$model_selection %in% "Full Model") {
-          return(HTML(as.character(tab_model(gam_all_summer_10304, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_all_summer_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        if (input$model_selection %in% "Trimmed Model") {
-          return(HTML(as.character(tab_model(gam_selected_summer_10304, show.aic = TRUE))[4][1]))
+        if (input$model_selection %in% "Selected Model 1") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_summer_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        
+        if (input$model_selection %in% "Selected Model 2") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam2_uni_selected_summer_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
+        }
         if (input$model_selection %in% "Interactions") {
-          return(HTML(as.character(tab_model(gam_selected_interac_summer_10304, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_interac_summer_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
       }
     })
     output$model_tab_winter <- renderUI({
       if (input$model_catchment %in% "Fränkische Saale Salz") {
         if (input$model_selection %in% "Full Model") {
-          return(HTML(as.character(tab_model(gam2_all_winter_20203, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_all_winter_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        if (input$model_selection %in% "Trimmed Model") {
-          return(HTML(as.character(tab_model(gam_selected_winter_20203, show.aic = TRUE))[4][1]))
+        if (input$model_selection %in% "Selected Model 1") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_winter_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
+        }
+        if (input$model_selection %in% "Selected Model 2") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam2_uni_selected_winter_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
         if (input$model_selection %in% "Interactions") {
-          return(HTML(as.character(tab_model(gam_selected_interact_winter_20203, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_interac_winter_20203), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
       }
       if (input$model_catchment %in% "Iller Kempten") {
         if (input$model_selection %in% "Full Model") {
-          return(HTML(as.character(tab_model(gam_all_winter_11502, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_all_winter_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        if (input$model_selection %in% "Trimmed Model") {
-          return(HTML(as.character(tab_model(gam_trimmed_winter_11502, show.aic = TRUE))[4][1]))
+        if (input$model_selection %in% "Selected Model 1") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_winter_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
+        }
+        if (input$model_selection %in% "Selected Model 2") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam2_uni_selected_winter_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
         if (input$model_selection %in% "Interactions") {
-          return(HTML(as.character(tab_model(gam_interactions_winter_11502, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_interac_winter_11502), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
       }
       if (input$model_catchment %in% "Isar Mittenwald") {
         if (input$model_selection %in% "Full Model") {
-          return(HTML(as.character(tab_model(gam_all_winter_10304, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_all_winter_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        if (input$model_selection %in% "Trimmed Model") {
-          return(HTML(as.character(tab_model(gam_selected_winter_10304, show.aic = TRUE))[4][1]))
+        if (input$model_selection %in% "Selected Model 1") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_winter_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
-        
+        if (input$model_selection %in% "Selected Model 2") {
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam2_uni_selected_winter_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
+        }
         if (input$model_selection %in% "Interactions") {
-          return(HTML(as.character(tab_model(gam_selected_interac_winter_10304, show.aic = TRUE))[4][1]))
+          return(HTML(modelsummary(list("Estimate [CI]" = le_gam_uni_selected_interac_winter_10304), exponentiate = input$model_odds , estimate = "{estimate} [{conf.low}, {conf.high}] {stars}", fmt = fmt_sprintf("%.3f"), statistic = NULL, coef_omit = "Intercept", gof_map = c("aic", "r.squared"), align = "ll", output = "html")))
         }
       }
     })
