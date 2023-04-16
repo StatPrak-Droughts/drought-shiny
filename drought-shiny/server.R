@@ -8,6 +8,7 @@ library(mgcv)
 library(sjPlot)
 library(slickR)
 library(corrplot)
+library(shinyBS)
 library(verification)
 # Data Read in ----
 source("data_read.R")
@@ -445,21 +446,24 @@ shinyServer(function(input, output) {
     })
     
     # QPR Tab ----
+    clrs <- styleInterval(seq(0, 0.8, 0.05), round(seq(255, 40, length.out = length(seq(0,0.8, 0.05)) + 1), 0) %>%
+                            {paste0("rgb(255,", ., ",", ., ")")})
+    
     pick_qpr_summer_table <-  reactive({
       if (input$extreme_value_catchment %in% "Fränkische Saale Salz") {
         return(datatable(qpr_hydro_summer_10304, rownames = TRUE, options = list(scrollX = TRUE,
                                                                           scrollY = TRUE,
-                                                                          autoWidth = TRUE)))
+                                                                          autoWidth = TRUE)) %>% formatStyle(colnames(qpr_hydro_summer_10304), backgroundColor = clrs))
       }
       if (input$extreme_value_catchment %in% "Iller Kempten") {
         return(datatable(qpr_hydro_summer_11502, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
-                                                                                 autoWidth = TRUE)))
+                                                                                 autoWidth = TRUE))%>% formatStyle(colnames(qpr_hydro_summer_11502), backgroundColor = clrs))
       }
       if (input$extreme_value_catchment %in% "Isar Mittenwald") {
         return(datatable(qpr_hydro_summer_20203, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
-                                                                                 autoWidth = TRUE)))
+                                                                                 autoWidth = TRUE))%>% formatStyle(colnames(qpr_hydro_summer_20203), backgroundColor = clrs))
       }
     }
     )
@@ -468,17 +472,17 @@ shinyServer(function(input, output) {
       if (input$extreme_value_catchment %in% "Fränkische Saale Salz") {
         return(datatable(qpr_hydro_winter_10304, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
-                                                                                 autoWidth = TRUE)))
+                                                                                 autoWidth = TRUE))%>% formatStyle(colnames(qpr_hydro_summer_10304), backgroundColor = clrs))
       }
       if (input$extreme_value_catchment %in% "Iller Kempten") {
         return(datatable(qpr_hydro_winter_11502, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
-                                                                                 autoWidth = TRUE)))
+                                                                                 autoWidth = TRUE))%>% formatStyle(colnames(qpr_hydro_winter_11502), backgroundColor = clrs))
       }
       if (input$extreme_value_catchment %in% "Isar Mittenwald") {
         return(datatable(qpr_hydro_winter_20203, rownames = TRUE, options = list(scrollX = TRUE,
                                                                                  scrollY = TRUE,
-                                                                                 autoWidth = TRUE)))
+                                                                                 autoWidth = TRUE))%>% formatStyle(colnames(qpr_hydro_winter_20203), backgroundColor = clrs))
       }
     }
     )
@@ -1817,4 +1821,5 @@ shinyServer(function(input, output) {
         roc.plot(hydro_winter_10304_test$lowlevel, hydro_winter_10304_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
       }
     })
+
 })
