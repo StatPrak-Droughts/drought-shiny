@@ -3,11 +3,11 @@ library(shinydashboard)
 library(tmap)
 library(shiny)
 library(sf)
+library(shinyBS)
 library(shinythemes)
 library(shinycssloaders)
 library(tmap)
 library(tmaptools)
-library(plotly)
 library(mgcv)
 library(tidyverse)
 library(corrplot)
@@ -21,9 +21,17 @@ background: DodgerBlue;
 /* Change the text size to 15 pixels. */
 font-size: 15px;
 }"
+tags$style(HTML("
+      .box-header {
+        padding: 0 10px 0 0;
+      }
+      .box-header h3 {
+        width: 100%;
+        padding: 10px;
+      }"))
 
 shinyUI(fluidPage(
-    navbarPage(id = "navbar", title = div(img(src='icon.png', style="background-color: transparent; margin-top: -10px;", height = 35), tags$a(href= "https://github.com/StatPrak-Droughts", "Niedrigwasser BY")),
+  navbarPage(id = "navbar", title = div(img(src='icon.png', style="background-color: transparent; margin-top: -10px;", height = 35), tags$a(href= "https://github.com/StatPrak-Droughts", "Niedrigwasser BY")),
                theme = shinytheme("lumen"),
                navbarMenu("Pegel", icon = icon("globe"),
                           tabPanel("Überblick", fluid = TRUE, icon = icon("map"),
@@ -79,7 +87,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                        )
                                        )
                                    ),
-                          tabPanel("Verteilung Treiber / Niedrigwasser", icon = icon("chart-simple"),
+                          tabPanel("Konditionale Verteilung von Niedrigwasserevents", icon = icon("chart-simple"),
                                    sidebarLayout(
                                        sidebarPanel(
                                            h1("Eingaben"),
@@ -88,8 +96,26 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
-                                                       tabPanel("Sommer", h1("Sommer"), dataTableOutput("qpr_hydro_summer")),
-                                                       tabPanel("Winter", h1("Winter"), dataTableOutput("qpr_hydro_winter"))
+                                                       tabPanel("Sommer", h1("Sommer"), h2("Erklärung"),
+                                                                p("Datengrundlage: Daten aller 3 Pegel, bedingt auf 'Niedrigwasserevent eingetreten'"),
+                                                                p("Zeilenindex: Dezil der Treibervariable"),
+                                                                p("Spaltenname: Treibervariable"),
+                                                                p("Zellenwert: Anteil der Niedrigwasserevents im jeweiligen Dezil (10% der Treibervariable)"),
+                                                                br(),
+                                                                p(strong("Beispiel")),
+                                                                p("Zellenwert = 1: 100% der Niedrigwasserevents liegen in diesem Dezil"),
+                                                                p("Gesamte Spalte = 0.1: Gleichmäßige Verteilung der Niedrigwasserevents"), dataTableOutput("qpr_hydro_summer")),
+                                                       tabPanel("Winter", h1("Winter"), h2("Erklärung"),
+                                                                p("Zeilenindex: Dezil der Treibervariable"),
+                                                                br(),
+                                                                p("Spaltenname: Treibervariable"),
+                                                                p("Zellenwert: Anteil der Niedrigwasserevents im jeweiligen Dezil (10% der Treibervariable)"),
+                                                                br(),
+                                                                p(strong("Beispiel")),
+                                                                br(),
+                                                                p("Zellenwert = 1: 100% der Niedrigwasserevents liegen in diesem Dezil"),
+                                                                br(),
+                                                                p("Gesamte Spalte = 0.1: Gleichmäßige Verteilung der Niedrigwasserevents"), dataTableOutput("qpr_hydro_winter"))
                                            )
                                        )
                                    )
@@ -117,9 +143,9 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                    sidebarLayout(
                                        sidebarPanel(
                                            h1("Eingaben"),
-                                           selectInput("model_catchment", label = "Select Catchment", 
-                                                       choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald")),
+                                           selectInput("model_catchment", label = "Wähle Pegel",  choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"), selected = "Iller Kempten"),
                                            selectInput("model_selection", label = "Wähle Modell", choices = c("Full Model", "Selected Model 1", "Selected Model 2", "Interactions (Best fit)" = "Interactions")),
+                                           checkboxInput("model_odds", label = "Zeige Odds Ratio anstatt log. Odds", FALSE),
                                            checkboxInput("model_summary", label = "Zeige Modell Zusammenfassung?", FALSE),
                                            checkboxInput("effect_plots", label = "Zeige Effekt Plots?", FALSE),
                                            uiOutput("slider_ui")
@@ -164,19 +190,19 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                    sidebarLayout(
                                      sidebarPanel(
                                        h1("Eingaben"),
-                                       selectInput("roc_catchment", label = "Select Catchment", 
+                                       selectInput("roc_catchment", label = "Wähle Pegel", 
                                                    choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"))
                                      ),
                                      mainPanel(
                                        tabsetPanel(type = "tabs",
                                                    tabPanel("Summer",
                                                             h1("Summer"),
-                                                            p("For the ROC analysis we only used the model with interactions and best fit for each catchment"),
+                                                            p("Für die ROC Analyse, wurde nur das Model 'Interaktionen' verwendet, welches auf den besten Fit optimiert worden ist."),
                                                             plotOutput("roc_summer")
                                                    ),
                                                    tabPanel("Winter", 
                                                             h1("Winter"),
-                                                            p("For the ROC analysis we only used the model with interactions and best fit for each catchment"),
+                                                            p("Für die ROC Analyse, wurde nur das Model 'Interaktionen' verwendet, welches auf den besten Fit optimiert worden ist."),
                                                             plotOutput("roc_winter")
                                                    )
                                        )

@@ -1,9 +1,17 @@
+library(sf)
 hydro_summer_20203 <- readRDS(file = "data/hydro_summer_20203.RDS")
 hydro_summer_11502 <- readRDS(file = "./data/hydro_summer_11502.RDS")
 hydro_summer_10304 <- readRDS(file = "./data/hydro_summer_10304.RDS")
 hydro_winter_20203 <- readRDS(file = "./data/hydro_winter_20203.RDS")
 hydro_winter_11502 <- readRDS(file = "./data/hydro_winter_11502.RDS")
 hydro_winter_10304 <- readRDS(file = "./data/hydro_winter_10304.RDS")
+hydro_summer_10304_kbe <- readRDS(file = "data/hydro_summer_10304_kbe.RDS")
+hydro_winter_10304_kbe <- readRDS(file = "data/hydro_winter_10304_kbe.RDS")
+hydro_summer_11502_kbe <- readRDS(file = "data/hydro_summer_11502_kbe.RDS")
+hydro_winter_11502_kbe <- readRDS(file = "data/hydro_winter_11502_kbe.RDS")
+hydro_summer_20203_kbe <- readRDS(file = "data/hydro_summer_20203_kbe.RDS")
+hydro_winter_20203_kbe <- readRDS(file = "data/hydro_winter_20203_kbe.RDS")
+
 hydro_total <- readRDS(file = "./data/hydro_total.RDS")
 pegel_prop <- readRDS(file = "./data/pegel_prop.RDS")
 hydro_bavaria <- read_sf("./data/Geo-Daten_Uebersicht/shapefile/EZG_OHNE_Reservoir_UTM32.shp")
@@ -77,6 +85,7 @@ qpr_hydro_winter_10304 <- readRDS("./added_data/tables/extreme_values/quantile_p
 qpr_hydro_winter_11502 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_11502.RDS")
 qpr_hydro_winter_20203 <- readRDS("./added_data/tables/extreme_values/quantile_percents_ranges_hydro_winter_20203.RDS")
 
+# Full Spline Model load ----
 # Winter
 ## Full Models
 load(file = "./added_data/models/gam_all_winter_10304.Rdata")
@@ -118,6 +127,50 @@ load(file = "./added_data/models/gam2_uni_selected_summer_20203.Rdata")
 load(file = "./added_data/models/gam_uni_selected_interac_summer_10304.Rdata")
 load(file = "./added_data/models/gam_uni_selected_interac_summer_11502.Rdata")
 load(file = "./added_data/models/gam_uni_selected_interac_summer_20203.Rdata")
+
+# LE Model load ----
+# Winter
+## Full Models
+load(file = "./added_data/le_models/le_gam_all_winter_10304.Rdata")
+load(file = "./added_data/le_models/le_gam_all_winter_11502.Rdata")
+load(file = "./added_data/le_models/le_gam_all_winter_20203.Rdata")
+
+## Selected 1 ----
+load(file = "./added_data/le_models/le_gam_uni_selected_winter_10304.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_winter_11502.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_winter_20203.Rdata")
+
+## Selected 2 ----
+load(file = "./added_data/le_models/le_gam2_uni_selected_winter_10304.Rdata")
+load(file = "./added_data/le_models/le_gam2_uni_selected_winter_11502.Rdata")
+load(file = "./added_data/le_models/le_gam2_uni_selected_winter_20203.Rdata")
+
+## Interactions ----
+load(file = "./added_data/le_models/le_gam_uni_selected_interac_winter_10304.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_interac_winter_11502.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_interac_winter_20203.Rdata")
+
+# Summer
+## Full Models
+load(file = "./added_data/le_models/le_gam_all_summer_10304.Rdata")
+load(file = "./added_data/le_models/le_gam_all_summer_11502.Rdata")
+load(file = "./added_data/le_models/le_gam_all_summer_20203.Rdata")
+
+## Selected 1 ----
+load(file = "./added_data/le_models/le_gam_uni_selected_summer_10304.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_summer_11502.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_summer_20203.Rdata")
+
+## Selected 2 ----
+load(file = "./added_data/le_models/le_gam2_uni_selected_summer_10304.Rdata")
+load(file = "./added_data/le_models/le_gam2_uni_selected_summer_11502.Rdata")
+load(file = "./added_data/le_models/le_gam2_uni_selected_summer_20203.Rdata")
+
+## Interactions ----
+load(file = "./added_data/le_models/le_gam_uni_selected_interac_summer_10304.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_interac_summer_11502.Rdata")
+load(file = "./added_data/le_models/le_gam_uni_selected_interac_summer_20203.Rdata")
+
 
 # Correlation Plots ----
 ## Summer ----
