@@ -1756,8 +1756,8 @@ shinyServer(function(input, output) {
     output$corr_hydro_winter <- renderPlot({
       if (input$corr_catchment %in% "Fränkische Saale Salz") {
         if (input$corr_corr %in% "Spearman") {
-          correlationm_spearman_winter_10304 <- cor(subset_hydro_winter_10304, method = "spearman", use = "complete.obs")
-          corrplot(correlationm_spearman_winter_10304, method = "number", type = "lower", tl.col = "black")
+          correlationm_spearman_winter_20203 <- cor(subset_hydro_winter_20203, method = "spearman", use = "complete.obs")
+          corrplot(correlationm_spearman_winter_20203, method = "number", type = "lower", tl.col = "black")
         }
         if (input$corr_corr %in% "Pearson") {
           correlationm_pearson_winter_20203 <- cor(subset_hydro_winter_20203, method = "pearson", use = "complete.obs")
@@ -1783,8 +1783,8 @@ shinyServer(function(input, output) {
         }
         
         if (input$corr_corr %in% "Pearson") {
-          correlationm_pearson_winter_20203 <- cor(subset_hydro_winter_20203, method = "pearson", use = "complete.obs")
-          corrplot(correlationm_pearson_winter_20203, method = "number", type = "lower", tl.col = "black")
+          correlationm_pearson_winter_10304 <- cor(subset_hydro_winter_10304, method = "pearson", use = "complete.obs")
+          corrplot(correlationm_pearson_winter_10304, method = "number", type = "lower", tl.col = "black")
         }
       }
     })
