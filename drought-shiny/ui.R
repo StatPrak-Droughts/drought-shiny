@@ -11,6 +11,7 @@ library(tmaptools)
 library(mgcv)
 library(tidyverse)
 library(corrplot)
+library(modelsummary)
 library(verification)
 source("data_read.R")
 button_color_css <- "
@@ -104,7 +105,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                                                 br(),
                                                                 p(strong("Beispiel")),
                                                                 p("Zellenwert = 1: 100% der Niedrigwasserevents liegen in diesem Dezil"),
-                                                                p("Gesamte Spalte = 0.1: Gleichmäßige Verteilung der Niedrigwasserevents"), dataTableOutput("qpr_hydro_summer")),
+                                                                p("Gesamte Spalte = 0.1: Gleichmäßige Verteilung der Niedrigwasserevents"), DT::dataTableOutput("qpr_hydro_summer")),
                                                        tabPanel("Winter", h1("Winter"), h2("Erklärung"),
                                                                 p("Zeilenindex: Dezil der Treibervariable"),
                                                                 br(),
