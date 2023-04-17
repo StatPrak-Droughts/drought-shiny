@@ -147,7 +147,6 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                            selectInput("model_catchment", label = "Wähle Pegel",  choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"), selected = "Iller Kempten"),
                                            selectInput("model_selection", label = "Wähle Modell", choices = c("Full Model", "Selected Model 1", "Selected Model 2", "Interactions (Best fit)" = "Interactions")),
                                            checkboxInput("model_odds", label = "Zeige Odds Ratio anstatt log. Odds", FALSE),
-                                           p(strong("Hinweis:")),
                                            checkboxInput("model_summary", label = "Zeige Modell Zusammenfassung?", FALSE),
                                            checkboxInput("effect_plots", label = "Zeige Effekt Plots?", FALSE),
                                            uiOutput("slider_ui")
@@ -224,7 +223,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                           ),
                           tabPanel("Modelle Leitfaden", icon = icon("lightbulb"),
                                    fluidRow(
-                                     h1("Modelle LEitfaden"),
+                                     h1("Modelle Leitfaden"),
                                      p("Generalisierte additive Modelle (GAMs) sind eine Art von Regressionsanalyse, die verwendet wird, um Beziehungen zwischen einer Antwortvariable und einer oder mehreren Prädiktorvariablen zu modellieren. In der binomialen Regression ist die Antwortvariable binär (z.B. 0 oder 1), und die Prädiktorvariablen können entweder kontinuierlich oder kategorial sein.
 Die Interpretation von GAM-Koeffizienten in der binomialen Regression erfolgt in folgenden Schritten:"),
                                      h2("Lineare GAM-Koeffizienten:"),
