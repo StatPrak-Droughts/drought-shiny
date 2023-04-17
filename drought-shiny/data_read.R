@@ -174,13 +174,13 @@ load(file = "./added_data/le_models/le_gam_uni_selected_interac_summer_20203.Rda
 
 # Correlation Plots ----
 ## Summer ----
-subset_hydro_summer_10304 <- readRDS("./data/corrplots/subset_hydro_summer_10304.RDS")
-subset_hydro_summer_11502 <- readRDS("./data/corrplots/subset_hydro_summer_11502.RDS")
-subset_hydro_summer_20203 <- readRDS("./data/corrplots/subset_hydro_summer_20203.RDS")
+subset_hydro_summer_10304_kbe <- readRDS("./data/corrplots/subset_hydro_summer_10304_kbe.RDS")
+subset_hydro_summer_11502_kbe <- readRDS("./data/corrplots/subset_hydro_summer_11502_kbe.RDS")
+subset_hydro_summer_20203_kbe <- readRDS("./data/corrplots/subset_hydro_summer_20203_kbe.RDS")
 
-subset_hydro_winter_10304 <- readRDS("./data/corrplots/subset_hydro_winter_10304.RDS")
-subset_hydro_winter_11502 <- readRDS("./data/corrplots/subset_hydro_winter_11502.RDS")
-subset_hydro_winter_20203 <- readRDS("./data/corrplots/subset_hydro_winter_20203.RDS")
+subset_hydro_winter_10304_kbe <- readRDS("./data/corrplots/subset_hydro_winter_10304_kbe.RDS")
+subset_hydro_winter_11502_kbe <- readRDS("./data/corrplots/subset_hydro_winter_11502_kbe.RDS")
+subset_hydro_winter_20203_kbe <- readRDS("./data/corrplots/subset_hydro_winter_20203_kbe.RDS")
 # Setup test set
 hydro_winter_11502_test <- hydro_winter_11502 %>% filter(member != "kbe")
 hydro_winter_11502_test$lowlevel <- as.logical(hydro_winter_11502_test$lowlevel)
