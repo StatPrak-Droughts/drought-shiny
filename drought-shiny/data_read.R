@@ -42,7 +42,44 @@ hydro_bavaria_10304 <- hydro_bavaria %>% filter(gridcode == 10304)%>%
     left_join(pegel_prop, by = c("gridcode" = "ID"))
 hydro_bavaria_three <- hydro_bavaria %>% filter(gridcode %in% c(10304, 11502, 20203))%>%
     left_join(pegel_prop, by = c("gridcode" = "ID"))
+
+
 # Descriptive Data
+# By year
+table_yearly_avg_min_groundwaterdepth_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_groundwaterdepth_yearly.RDS")
+table_yearly_avg_max_groundwaterdepth_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_groundwaterdepth_yearly.RDS")
+table_yearly_avg_min_soilwater_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_soilwater_yearly.RDS")
+table_yearly_avg_max_soilwater_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_soilwater_yearly.RDS")
+table_yearly_avg_min_snowstorage_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_snowstorage_yearly.RDS")
+table_yearly_avg_max_snowstorage_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_snowstorage_yearly.RDS")
+table_yearly_avg_min_airtmp_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_airtmp_yearly.RDS")
+table_yearly_avg_max_airtmp_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_airtmp_yearly.RDS")
+table_yearly_avg_max_precip_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_precip_yearly.RDS")
+table_yearly_avg_min_precip_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_precip_yearly.RDS")
+table_yearly_avg_max_glorad_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_glorad_yearly.RDS")
+table_yearly_avg_min_glorad_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_glorad_yearly.RDS")
+table_yearly_avg_max_relhum_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_relhum_yearly.RDS")
+table_yearly_avg_min_relhum_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_relhum_yearly.RDS")
+table_yearly_avg_max_infiltration_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_max_infiltration_yearly.RDS")
+table_yearly_avg_min_infiltration_yearly <-
+  readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_infiltration_yearly.RDS")
+
+# by Hydro year
 # Load tables
 table_yearly_avg_min_groundwaterdepth <-
   readRDS("added_data/tables/driver_analysis/table_yearly_avg_min_groundwaterdepth.RDS")
