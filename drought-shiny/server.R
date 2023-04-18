@@ -43,10 +43,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(min_plot_groundwaterdepth_facet)
         } else {
-           min_plot_groundwaterdepth <- ggplot(data = table_yearly_avg_min_groundwaterdepth, mapping = aes(x = YY, y = avg_min_groundwaterdepth, color = waterlevel)) +
+           min_plot_groundwaterdepth <- ggplot(data = table_yearly_avg_min_groundwaterdepth_yearly, mapping = aes(x = YY, y = avg_min_groundwaterdepth, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Minimum des Grundwasserstandes \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Minimum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -72,10 +72,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(min_plot_soilwater_facet)
         } else {
-          min_plot_soilwater <- ggplot(data = table_yearly_avg_min_soilwater, mapping = aes(x = YY, y = avg_min_soilwater, color = waterlevel)) +
+          min_plot_soilwater <- ggplot(data = table_yearly_avg_min_soilwater_yearly, mapping = aes(x = YY, y = avg_min_soilwater, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Minimum der täglichen oberflächennahen \nrelativen Bodenfeuchte im Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Minimum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -101,10 +101,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(min_plot_snowstorage_facet)
         } else {
-          min_plot_snowstorage <- ggplot(data = table_yearly_avg_min_snowstorage, mapping = aes(x = YY, y = avg_min_snowstorage, color = waterlevel)) +
+          min_plot_snowstorage <- ggplot(data = table_yearly_avg_min_snowstorage_yearly, mapping = aes(x = YY, y = avg_min_snowstorage, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglichem Schneespeicher \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Minimum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -130,10 +130,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(min_plot_airtmp_facet)
         } else {
-          min_plot_airtmp <- ggplot(data = table_yearly_avg_min_airtmp, mapping = aes(x = YY, y = avg_min_airtmp, color = waterlevel)) +
+          min_plot_airtmp <- ggplot(data = table_yearly_avg_min_airtmp_yearly, mapping = aes(x = YY, y = avg_min_airtmp, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglicher Lufttemperatur \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Minimum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -160,10 +160,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(min_plot_precip_facet)
         } else {
-          min_plot_precip <- ggplot(data = table_yearly_avg_min_precip, mapping = aes(x = YY, y = avg_min_precip, color = waterlevel)) +
+          min_plot_precip <- ggplot(data = table_yearly_avg_min_precip_yearly, mapping = aes(x = YY, y = avg_min_precip, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglichem Niederschlag \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Minimum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -190,10 +190,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(min_plot_glorad_facet)
         } else {
-          min_plot_glorad <- ggplot(data = table_yearly_avg_min_glorad, mapping = aes(x = YY, y = avg_min_glorad, color = waterlevel)) +
+          min_plot_glorad <- ggplot(data = table_yearly_avg_min_glorad_yearly, mapping = aes(x = YY, y = avg_min_glorad, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Miniumum an täglich einfallender \nkurzwelligen Strahlun im Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Miniumum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -201,6 +201,36 @@ shinyServer(function(input, output) {
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(min_plot_glorad)
+        }
+      }
+      
+      ### relhum ----
+      if (input$variable_min_max_plot %in% "relhum") {
+        if (input$facet_hydro_year){
+          min_plot_relhum_facet <- ggplot(data = table_yearly_avg_min_relhum, mapping = aes(x = YY, y = avg_min_relhum, color = waterlevel)) +
+            geom_line() +
+            geom_point() +
+            labs(title = "Jährliches durchschnittliches Miniumum an täglicher relativer \nLuftfeuchtigkeit je Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Miniumum \nan täglicher relativer \nLuftfeuchtigkeit (in %)",
+                 x = "Datum") +
+            guides(color=guide_legend(title="Pegel")) +
+            theme(text = element_text(size = 20),
+                  legend.position="bottom") +
+            scale_color_brewer(palette = "Dark2") +
+            facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
+          return(min_plot_relhum_facet)
+        } else {
+          min_plot_relhum <- ggplot(data = table_yearly_avg_min_relhum_yearly, mapping = aes(x = YY, y = avg_min_relhum, color = waterlevel)) +
+            geom_line() +
+            geom_point() +
+            labs(title = "Jährliches durchschnittliches Miniumum an täglicher relativer \nLuftfeuchtigkeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Miniumum \nan täglicher relativer \nLuftfeuchtigkeit (in %)",
+                 x = "Datum") +
+            guides(color=guide_legend(title="Pegel")) +
+            theme(text = element_text(size = 20),
+                  legend.position="bottom") +
+            scale_color_brewer(palette = "Dark2")
+          return(min_plot_relhum)
         }
       }
       
@@ -220,10 +250,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(min_plot_infiltration_facet)
         } else {
-          min_plot_infiltration <- ggplot(data = table_yearly_avg_min_infiltration, mapping = aes(x = YY, y = avg_min_infiltration, color = waterlevel)) +
+          min_plot_infiltration <- ggplot(data = table_yearly_avg_min_infiltration_yearly, mapping = aes(x = YY, y = avg_min_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Minimum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Minimum an täglicher Sickerung \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Minimum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -253,10 +283,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(max_plot_groundwaterdepth_facet)
         } else {
-          max_plot_groundwaterdepth <- ggplot(data = table_yearly_avg_max_groundwaterdepth, mapping = aes(x = YY, y = avg_max_groundwaterdepth, color = waterlevel)) +
+          max_plot_groundwaterdepth <- ggplot(data = table_yearly_avg_max_groundwaterdepth_yearly, mapping = aes(x = YY, y = avg_max_groundwaterdepth, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum des Grundwasserstandes \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Maximum des Grundwasserstandes \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Maximum \ndes täglichem Grundwasserstandes \n(in m unter Oberfläche)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -282,10 +312,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(max_plot_soilwater_facet)
         } else {
-          max_plot_soilwater <- ggplot(data = table_yearly_avg_max_soilwater, mapping = aes(x = YY, y = avg_max_soilwater, color = waterlevel)) +
+          max_plot_soilwater <- ggplot(data = table_yearly_avg_max_soilwater_yearly, mapping = aes(x = YY, y = avg_max_soilwater, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte je Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Maximum der täglichen oberflächennahen \nrelativen Bodenfeuchte im Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Maximum \nder täglichen oberflächennahen \nrelativen Bodenfeuchte (in Prozentpunkten)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -311,10 +341,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(max_plot_snowstorage_facet)
         } else {
-          max_plot_snowstorage <- ggplot(data = table_yearly_avg_max_snowstorage, mapping = aes(x = YY, y = avg_max_snowstorage, color = waterlevel)) +
+          max_plot_snowstorage <- ggplot(data = table_yearly_avg_max_snowstorage_yearly, mapping = aes(x = YY, y = avg_max_snowstorage, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglichem Schneespeicher \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Maximum \nan täglichem Schneespeicher \n(in mm)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -340,10 +370,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(max_plot_airtmp_facet)
         } else {
-          max_plot_airtmp <- ggplot(data = table_yearly_avg_max_airtmp, mapping = aes(x = YY, y = avg_max_airtmp, color = waterlevel)) +
+          max_plot_airtmp <- ggplot(data = table_yearly_avg_max_airtmp_yearly, mapping = aes(x = YY, y = avg_max_airtmp, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher Lufttemperatur \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Maximum \nan täglicher Lufttemperatur \n(in °C)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -370,10 +400,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(max_plot_precip_facet)
         } else {
-          max_plot_precip <- ggplot(data = table_yearly_avg_max_precip, mapping = aes(x = YY, y = avg_max_precip, color = waterlevel)) +
+          max_plot_precip <- ggplot(data = table_yearly_avg_max_precip_yearly, mapping = aes(x = YY, y = avg_max_precip, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglichem Niederschlag \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Maximum \nan täglichem Niederschlag \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -400,10 +430,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(max_plot_glorad_facet)
         } else {
-          max_plot_glorad <- ggplot(data = table_yearly_avg_max_glorad, mapping = aes(x = YY, y = avg_max_glorad, color = waterlevel)) +
+          max_plot_glorad <- ggplot(data = table_yearly_avg_max_glorad_yearly, mapping = aes(x = YY, y = avg_max_glorad, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung je Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglich einfallender \nkurzwelligen Strahlung im Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Maximum \nan täglich einfallender \nkurzwelligen Strahlung (in Wh/m²)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
@@ -411,6 +441,36 @@ shinyServer(function(input, output) {
                   legend.position="bottom") +
             scale_color_brewer(palette = "Dark2")
           return(max_plot_glorad)
+        }
+      }
+      
+      ### relhum ----
+      if (input$variable_min_max_plot %in% "relhum") {
+        if (input$facet_hydro_year){
+          max_plot_relhum_facet <- ggplot(data = table_yearly_avg_max_relhum, mapping = aes(x = YY, y = avg_max_relhum, color = waterlevel)) +
+            geom_line() +
+            geom_point() +
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher relativer \nLuftfeuchtigkeit je Jahreszeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher relativer \nLuftfeuchtigkeit (in %)",
+                 x = "Datum") +
+            guides(color=guide_legend(title="Pegel")) +
+            theme(text = element_text(size = 20),
+                  legend.position="bottom") +
+            scale_color_brewer(palette = "Dark2") +
+            facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
+          return(max_plot_relhum_facet)
+        } else {
+          max_plot_relhum <- ggplot(data = table_yearly_avg_max_relhum_yearly, mapping = aes(x = YY, y = avg_max_relhum, color = waterlevel)) +
+            geom_line() +
+            geom_point() +
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher relativer \nLuftfeuchtigkeit im Zeitverlauf (aller Member)",
+                 y = "Jährliches durchschnittliches Maximum \nan täglicher relativer \nLuftfeuchtigkeit (in %)",
+                 x = "Datum") +
+            guides(color=guide_legend(title="Pegel")) +
+            theme(text = element_text(size = 20),
+                  legend.position="bottom") +
+            scale_color_brewer(palette = "Dark2")
+          return(max_plot_relhum)
         }
       }
       
@@ -430,10 +490,10 @@ shinyServer(function(input, output) {
             facet_wrap(vars(hydro_year), labeller = as_labeller(c(`summer` = "Sommer", `winter` = "Winter")))
           return(max_plot_infiltration_facet)
         } else {
-          max_plot_infiltration <- ggplot(data = table_yearly_avg_max_infiltration, mapping = aes(x = YY, y = avg_max_infiltration, color = waterlevel)) +
+          max_plot_infiltration <- ggplot(data = table_yearly_avg_max_infiltration_yearly, mapping = aes(x = YY, y = avg_max_infiltration, color = waterlevel)) +
             geom_line() +
             geom_point() +
-            labs(title = "Jährliches durchschnittliches Maximum an täglicher Sickerung \nje Jahreszeit im Zeitverlauf (aller Member)",
+            labs(title = "Jährliches durchschnittliches Maximum an täglicher Sickerung \nim Zeitverlauf (aller Member)",
                  y = "Jährliches durchschnittliches Maximum \nan täglicher Sickerung \n(in mm/24h)",
                  x = "Datum") +
             guides(color=guide_legend(title="Pegel")) +
