@@ -81,7 +81,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                    sidebarLayout(
                                        sidebarPanel(
                                            h1("Eingaben"),
-                                           selectInput("variable_min_max_plot", label = "Wähle Variable", choices = c("groundwaterdepth", "soilwater", "snowstorage", "airtmp", "precipitation", "glorad", "infiltration"), multiple = FALSE),
+                                           selectInput("variable_min_max_plot", label = "Wähle Variable", choices = c("groundwaterdepth", "soilwater", "snowstorage", "airtmp", "precipitation", "glorad", "relhum", "infiltration"), multiple = FALSE),
                                            checkboxInput("facet_hydro_year", label = "Aufteilung nach hydrolog. Halbjahr?", FALSE)
                                        ),
                                        mainPanel(h1("Minima"), plotOutput("min_plot"), br(), h1("Maxima"), plotOutput("max_plot")
