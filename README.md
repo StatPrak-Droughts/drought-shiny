@@ -35,7 +35,7 @@ You will need access to the Climex-II data which is not publicly available. Acce
 First of all you will need to generate the data used from the main repositoy which can be found [here](https://github.com/StatPrak-Droughts/Drought-Project) or under the organization's repos.
 
 1. Follow the instructions under the "Setup" section.
-2. Copy the folders `added_data` and `data` as they are into the folder drought-shiny. (The folders should be at the same level as `ui.R` and `server.R`
+2. Copy the folders `added_data` and `data` into the folder drought-shiny. (The folders should be at the same level as `ui.R` and `server.R`)
 
 After that simply call `renv::restore` and you are set to go to run the Shiny application.
 
