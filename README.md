@@ -1,6 +1,6 @@
 # Low-level Water Events in Bavaria - Shiny Application
 <p align="center">
-<img src="www/icon.png" width="100" height="100" class="center">
+<img src="drought-shiny/www/icon.png" width="100" height="100" class="center">
 </p>
 This R shiny App let's you explore and deep dive into the analysis of the low-level water events in Bavaria analysis.
 ## App Structure
