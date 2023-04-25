@@ -159,7 +159,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                                                 uiOutput("model_tab_summer"),
                                                                 p(strong("* p = 0.05 ** p = 0.01 *** p = 0.001 + p > 0.1 ")),
                                                                 p(strong("Hinweis:\n"), "Die Odds Ratios können bei den vergleichbaren Modellen (Full & Selected 1/2) bei unterschiedlichen Pegeln sehr extreme Werte annehmen. Eine Odds Ratio von 0 ist meistens durch Artefakte in den Daten zu erklären. Man sollte deshalb stets die Effekt und Rugplots betrachten. \n
-                                             Wir haben uns dafür entschlossen die Variablen dennoch nicht zu skalieren, da bestimmte Treiber wie 'Snowstorage' im Norden auf der gegebenen Skala sehr kleine log. Odss annehmen, im Süden jedoch bei gleicher Skala eine sinnvolle Interpretation gewährleisten."),
+                                             Wir haben uns dafür entschlossen die Variablen dennoch nicht zu skalieren, da bestimmte Treiber wie 'Snowstorage' im Norden auf der gegebenen Skala sehr kleine log. Odds annehmen, im Süden jedoch bei gleicher Skala eine sinnvolle Interpretation gewährleisten."),
                                                                 verbatimTextOutput("model_summary_summer"),
                                                                 plotOutput("model_effect_summer_1"),
                                                                 plotOutput("model_effect_summer_2"),
@@ -177,7 +177,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                                                 uiOutput("model_tab_winter"),
                                                                 p(strong("* p = 0.05 ** p = 0.01 *** p = 0.001 + p > 0.1 ")),
                                                                 p(strong("Hinweis:\n"), "Die Odds Ratios können bei den vergleichbaren Modellen (Full & Selected 1/2) bei unterschiedlichen Pegeln sehr extreme Werte annehmen. Eine Odds Ratio von 0 ist meistens durch Artefakte in den Daten zu erklären. Man sollte deshalb stets die Effekt und Rugplots betrachten. \n
-                                             Wir haben uns dafür entschlossen die Variablen dennoch nicht zu skalieren, da bestimmte Treiber wie 'Snowstorage' im Norden auf der gegebenen Skala sehr kleine log. Odss annehmen, im Süden jedoch bei gleicher Skala eine sinnvolle Interpretation gewährleisten."),
+                                             Wir haben uns dafür entschlossen die Variablen dennoch nicht zu skalieren, da bestimmte Treiber wie 'Snowstorage' im Norden auf der gegebenen Skala sehr kleine log. Odds annehmen, im Süden jedoch bei gleicher Skala eine sinnvolle Interpretation gewährleisten."),
                                                                 verbatimTextOutput("model_summary_winter"),
                                                                 plotOutput("model_effect_winter_1"),
                                                                 plotOutput("model_effect_winter_2"),
