@@ -1853,33 +1853,116 @@ shinyServer(function(input, output) {
     ## Summmer ----
     output$roc_summer <- renderPlot({
       if(input$roc_catchment %in% "Fränkische Saale Salz"){
-        hydro_summer_20203_pred <- predict(gam_uni_selected_interac_summer_20203, hydro_summer_20203_test, type = "response")
-        roc.plot(hydro_summer_20203_test$lowlevel, hydro_summer_20203_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+        if (input$roc_model %in% "Full Model") {
+          hydro_summer_20203_pred_full <- predict(gam_all_summer_20203, hydro_summer_20203_test, type = "response")
+          roc.plot(hydro_summer_20203_test$lowlevel, hydro_summer_20203_pred_full, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 1") {
+          hydro_summer_20203_pred_uni_1 <- predict(gam_uni_selected_summer_20203, hydro_summer_20203_test, type = "response")
+          roc.plot(hydro_summer_20203_test$lowlevel, hydro_summer_20203_pred_uni_1, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 2") {
+          hydro_summer_20203_pred_uni_2 <- predict(gam2_uni_selected_summer_20203, hydro_summer_20203_test, type = "response")
+          roc.plot(hydro_summer_20203_test$lowlevel, hydro_summer_20203_pred_uni_2, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Interactions") {
+          hydro_summer_20203_pred <- predict(gam_uni_selected_interac_summer_20203, hydro_summer_20203_test, type = "response")
+          roc.plot(hydro_summer_20203_test$lowlevel, hydro_summer_20203_pred, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
       }
       if (input$roc_catchment %in% "Iller Kempten") {
-        hydro_summer_11502_pred <- predict(gam_uni_selected_interac_summer_11502, hydro_summer_11502_test, type = "response")
-        roc.plot(hydro_summer_11502_test$lowlevel, hydro_summer_11502_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+        if (input$roc_model %in% "Full Model") {
+          hydro_summer_11502_pred_full <- predict(gam_all_summer_11502, hydro_summer_11502_test, type = "response")
+          roc.plot(hydro_summer_11502_test$lowlevel, hydro_summer_11502_pred_full, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 1") {
+          hydro_summer_11502_pred_uni_1 <- predict(gam_uni_selected_summer_11502, hydro_summer_11502_test, type = "response")
+          roc.plot(hydro_summer_11502_test$lowlevel, hydro_summer_11502_pred_uni_1, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 2") {
+          hydro_summer_11502_pred_uni_2 <- predict(gam2_uni_selected_summer_11502, hydro_summer_11502_test, type = "response")
+          roc.plot(hydro_summer_11502_test$lowlevel, hydro_summer_11502_pred_uni_2, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Interactions") {
+          hydro_summer_11502_pred <- predict(gam_uni_selected_interac_summer_11502, hydro_summer_11502_test, type = "response")
+          roc.plot(hydro_summer_11502_test$lowlevel, hydro_summer_11502_pred, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
       }
       if (input$roc_catchment %in% "Isar Mittenwald") {
-        hydro_summer_10304_pred <- predict(gam_uni_selected_interac_summer_10304, hydro_summer_10304_test, type = "response")
-        roc.plot(hydro_summer_10304_test$lowlevel, hydro_summer_10304_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+        if (input$roc_model %in% "Full Model") {
+          hydro_summer_10304_pred_full <- predict(gam_all_summer_10304, hydro_summer_10304_test, type = "response")
+          roc.plot(hydro_summer_10304_test$lowlevel, hydro_summer_10304_pred_full, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 1") {
+          hydro_summer_10304_pred_uni_1 <- predict(gam_uni_selected_summer_10304, hydro_summer_10304_test, type = "response")
+          roc.plot(hydro_summer_10304_test$lowlevel, hydro_summer_10304_pred_uni_1, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 2") {
+          hydro_summer_10304_pred_uni_2 <- predict(gam2_uni_selected_summer_10304, hydro_summer_10304_test, type = "response")
+          roc.plot(hydro_summer_10304_test$lowlevel, hydro_summer_10304_pred_uni_2, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Interactions") {
+          hydro_summer_10304_pred <- predict(gam_uni_selected_interac_summer_10304, hydro_summer_10304_test, type = "response")
+          roc.plot(hydro_summer_10304_test$lowlevel, hydro_summer_10304_pred, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
       }
     })
     
     ## Winter ----
     output$roc_winter <- renderPlot({
       if(input$roc_catchment %in% "Fränkische Saale Salz"){
-        hydro_winter_20203_pred <- predict(gam_uni_selected_interac_winter_20203, hydro_winter_20203_test, type = "response")
-        roc.plot(hydro_winter_20203_test$lowlevel, hydro_winter_20203_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+        if (input$roc_model %in% "Full Model") {
+          hydro_winter_20203_pred_full <- predict(gam_all_winter_20203, hydro_winter_20203_test, type = "response")
+          roc.plot(hydro_winter_20203_test$lowlevel, hydro_winter_20203_pred_full, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 1") {
+          hydro_winter_20203_pred_uni_1 <- predict(gam_uni_selected_winter_20203, hydro_winter_20203_test, type = "response")
+          roc.plot(hydro_winter_20203_test$lowlevel, hydro_winter_20203_pred_uni_1, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 2") {
+          hydro_winter_20203_pred_uni_2 <- predict(gam2_uni_selected_winter_20203, hydro_winter_20203_test, type = "response")
+          roc.plot(hydro_winter_20203_test$lowlevel, hydro_winter_20203_pred_uni_2, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Interactions") {
+          hydro_winter_20203_pred <- predict(gam_uni_selected_interac_winter_20203, hydro_winter_20203_test, type = "response")
+          roc.plot(hydro_winter_20203_test$lowlevel, hydro_winter_20203_pred, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
       }
       if (input$roc_catchment %in% "Iller Kempten") {
-        hydro_winter_11502_pred <- predict(gam_uni_selected_interac_winter_11502, hydro_winter_11502_test, type = "response")
-        roc.plot(hydro_winter_11502_test$lowlevel, hydro_winter_11502_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
-        
+        if (input$roc_model %in% "Full Model") {
+          hydro_winter_11502_pred_full <- predict(gam_all_winter_11502, hydro_winter_11502_test, type = "response")
+          roc.plot(hydro_winter_11502_test$lowlevel, hydro_winter_11502_pred_full, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 1") {
+          hydro_winter_11502_pred_uni_1 <- predict(gam_uni_selected_winter_11502, hydro_winter_11502_test, type = "response")
+          roc.plot(hydro_winter_11502_test$lowlevel, hydro_winter_11502_pred_uni_1, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 2") {
+          hydro_winter_11502_pred_uni_2 <- predict(gam2_uni_selected_winter_11502, hydro_winter_11502_test, type = "response")
+          roc.plot(hydro_winter_11502_test$lowlevel, hydro_winter_11502_pred_uni_2, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Interactions") {
+          hydro_winter_11502_pred <- predict(gam_uni_selected_interac_winter_11502, hydro_winter_11502_test, type = "response")
+          roc.plot(hydro_winter_11502_test$lowlevel, hydro_winter_11502_pred, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
       }
       if (input$roc_catchment %in% "Isar Mittenwald") {
-        hydro_winter_10304_pred <- predict(gam_uni_selected_interac_winter_10304, hydro_winter_10304_test, type = "response")
-        roc.plot(hydro_winter_10304_test$lowlevel, hydro_winter_10304_pred, xlab = "1 - Spezifität", ylab = "Sensitivität")
+        if (input$roc_model %in% "Full Model") {
+          hydro_winter_10304_pred_full <- predict(gam_all_winter_10304, hydro_winter_10304_test, type = "response")
+          roc.plot(hydro_winter_10304_test$lowlevel, hydro_winter_10304_pred_full, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 1") {
+          hydro_winter_10304_pred_uni_1 <- predict(gam_uni_selected_winter_10304, hydro_winter_10304_test, type = "response")
+          roc.plot(hydro_winter_10304_test$lowlevel, hydro_winter_10304_pred_uni_1, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Selected Model 2") {
+          hydro_winter_10304_pred_uni_2 <- predict(gam2_uni_selected_winter_10304, hydro_winter_10304_test, type = "response")
+          roc.plot(hydro_winter_10304_test$lowlevel, hydro_winter_10304_pred_uni_2, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
+        if (input$roc_model %in% "Interactions") {
+          hydro_winter_10304_pred <- predict(gam_uni_selected_interac_winter_10304, hydro_winter_10304_test, type = "response")
+          roc.plot(hydro_winter_10304_test$lowlevel, hydro_winter_10304_pred, xlab = "1 - Spezifität", ylab = "Sensitivität", plot.thres = c(0.01, 0.1, 0.5, 0.9), cex.lab = 1.5)
+        }
       }
     })
 

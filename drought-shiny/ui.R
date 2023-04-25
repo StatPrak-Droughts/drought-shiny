@@ -133,7 +133,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                      ),
                                      mainPanel(
                                        tabsetPanel(type = "tabs",
-                                                   tabPanel("Summer", h1("Summer"), plotOutput("corr_hydro_summer", height = 650)),
+                                                   tabPanel("Sommer", h1("Sommer"), plotOutput("corr_hydro_summer", height = 650)),
                                                    tabPanel("Winter", h1("Winter"), plotOutput("corr_hydro_winter", height = 650))
                                        )
                                      )
@@ -146,7 +146,7 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                        sidebarPanel(
                                            h1("Eingaben"),
                                            selectInput("model_catchment", label = "Wähle Pegel",  choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"), selected = "Iller Kempten"),
-                                           selectInput("model_selection", label = "Wähle Modell", choices = c("Full Model", "Selected Model 1", "Selected Model 2", "Interactions (Best fit)" = "Interactions")),
+                                           selectInput("model_selection", label = "Wähle Modell", choices = c("Full Model", "Selected Model 1", "Selected Model 2", "Interactions" = "Interactions")),
                                            checkboxInput("model_odds", label = "Zeige Odds Ratio anstatt log. Odds", FALSE),
                                            checkboxInput("model_summary", label = "Zeige Modell Zusammenfassung?", FALSE),
                                            checkboxInput("effect_plots", label = "Zeige Effekt Plots?", FALSE),
@@ -154,8 +154,8 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                        ),
                                        mainPanel(
                                            tabsetPanel(type = "tabs",
-                                                       tabPanel("Summer",
-                                                                h1("Summer"),
+                                                       tabPanel("Sommer",
+                                                                h1("Sommer"),
                                                                 uiOutput("model_tab_summer"),
                                                                 p(strong("* p = 0.05 ** p = 0.01 *** p = 0.001 + p > 0.1 ")),
                                                                 p(strong("Hinweis:\n"), "Die Odds Ratios können bei den vergleichbaren Modellen (Full & Selected 1/2) bei unterschiedlichen Pegeln sehr extreme Werte annehmen. Eine Odds Ratio von 0 ist meistens durch Artefakte in den Daten zu erklären. Man sollte deshalb stets die Effekt und Rugplots betrachten. \n
@@ -199,18 +199,18 @@ Des Weiteren zeigt der Pegel eine Exposition von 275.7, was bedeutet, dass er ei
                                      sidebarPanel(
                                        h1("Eingaben"),
                                        selectInput("roc_catchment", label = "Wähle Pegel", 
-                                                   choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"))
+                                                   choices = c("Fränkische Saale Salz", "Iller Kempten", "Isar Mittenwald"), selected = "Isar Mittenwald"),
+                                       selectInput("roc_model", label = "Wähle Modell",
+                                                   choices = c("Full Model", "Selected Model 1", "Selected Model 2", "Interactions" = "Interactions"))
                                      ),
                                      mainPanel(
                                        tabsetPanel(type = "tabs",
-                                                   tabPanel("Summer",
-                                                            h1("Summer"),
-                                                            p("Für die ROC Analyse, wurde nur das Model 'Interaktionen' verwendet, welches auf den besten Fit optimiert worden ist."),
+                                                   tabPanel("Sommer",
+                                                            h1("Sommer"),
                                                             plotOutput("roc_summer")
                                                    ),
                                                    tabPanel("Winter", 
                                                             h1("Winter"),
-                                                            p("Für die ROC Analyse, wurde nur das Model 'Interaktionen' verwendet, welches auf den besten Fit optimiert worden ist."),
                                                             plotOutput("roc_winter")
                                                    )
                                        )
