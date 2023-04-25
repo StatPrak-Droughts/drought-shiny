@@ -5,9 +5,9 @@ account: group-projects
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8866913
-bundleId: 7133134
+bundleId: 7134545
 url: https://group-projects.shinyapps.io/drought-shiny/
-when: 1682431423.82736
-lastSyncTime: 1682431423.82738
+when: 1682446459.02208
+lastSyncTime: 1682446459.0221
 asMultiple: FALSE
 asStatic: FALSE
