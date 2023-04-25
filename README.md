@@ -30,7 +30,7 @@ https://group-projects.shinyapps.io/drought-shiny/
 (needs time to boot up)
 
 ## Contributing, reproducibility and setup
-You will need access to the Climex-II data which is not publicly avaiable. Access can be granted by the Geography Department from the LMU.
+You will need access to the Climex-II data which is not publicly available. Access can be granted by the Geography Department from the LMU.
 ### Setup
 First of all you will need to generate the data used from the main repositoy which can be found [here](https://github.com/StatPrak-Droughts/Drought-Project) or under the organization's repos.
 
