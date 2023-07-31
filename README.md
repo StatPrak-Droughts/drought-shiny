@@ -26,9 +26,6 @@ The submenus are:
 * **About**: Introducing the project
 * **Model guidance and help**: Introducing and explaining our modelling approaches for everyone that wants to understand or revise GAMs.
 
-## App Link
-https://group-projects.shinyapps.io/drought-shiny/ 
-(needs time to boot up)
 
 ## Contributing, reproducibility and setup
 You will need access to the Climex-II data which is not publicly available. Access can be granted by the Geography Department from the LMU.
